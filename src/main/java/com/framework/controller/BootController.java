@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+// 声明该类为参与控制反转的类(相当于@ResponseBody 与  @Controller两个注解的集合)
 @RestController
 public class BootController {
 
+	// 声明触发路径
 	@RequestMapping("/")
 	String home() {
 		return "Home Sweet Home";
