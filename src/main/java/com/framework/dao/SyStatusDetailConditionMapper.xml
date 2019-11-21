@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.SyStatusDetailConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.SyStatusDetailImpl" id="syStatusDetail"/> 
+
+	<sql id="getColumn">
+		REPLACE(a.`code`, a.codeSyStatus, '') AS codeOrder,
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		IFNULL(b.name, '') nameSyStatus, 
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN syStatus AS b ON b.id = a.idSyStatus
+		
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+	
+	<!-- 查询树形结构 -->
+	<select id="selectTreeValue" parameterType="java.lang.Object" resultMap="syStatusDetail" resultType="java.util.HashMap">
+		SELECT 
+			a.id,
+			a.value value,
+			a.name AS title
+		FROM syStatusDetail AS a
+		<where>
+				a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idSyStatus != null">
+				AND a.idSyStatus = #{idSyStatus}
+			</if>
+			<if test="codeSyStatus != null">
+				AND a.codeSyStatus = #{codeSyStatus}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="code != null">
+				AND a.code = #{code}
+			</if>
+			<if test="value != null">
+				AND a.value = #{value}
+			</if>
+			<if test="statusTable != null">
+				AND a.statusTable = #{statusTable}
+			</if>
+			<if test="statusColumn != null">
+				AND a.statusColumn = #{statusColumn}
+			</if>
+			<if test="orderIndex != null">
+				AND a.orderIndex = #{orderIndex}
+			</if>
+			<if test="remark != null">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+		</where>
+	</select>
+
+</mapper>

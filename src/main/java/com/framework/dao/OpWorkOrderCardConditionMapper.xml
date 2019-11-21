@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpWorkOrderCardConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.OpWorkOrderCardImpl" id="opWorkOrderCard"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		IFNULL(b.name, '') AS nameOpDevice,
+		IFNULL(c1.name, '') AS nameMaUserOpCardOperation,
+		IFNULL(c2.name, '') AS nameMaUserOpCardPower,
+		IFNULL(c3.name, '') AS nameMaUserOpCardWork,
+		IFNULL(d.name, '') nameOpRoomOperation,
+		IFNULL(e.name, '') nameOpRoomElectric,		
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		INNER JOIN opDevice AS b ON b.id = a.idOpDevice
+		INNER JOIN maUser AS c1 ON c1.id = a.idMaUserOpCardOperation
+		INNER JOIN maUser AS c2 ON c2.id = a.idMaUserOpCardPower		
+		INNER JOIN maUser AS c3 ON c3.id = a.idMaUserOpCardWork
+		INNER JOIN opRoomOperation AS d ON d.id = b.idOpRoomOperation
+		INNER JOIN opRoomElectric AS e ON e.id = b.idOpRoomElectric					
+		
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+	<!-- 查询设备关联的工单中间表 -->
+	<select id="selectOpWorkOrderCard" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT
+			*
+		FROM
+			opWorkOrderCard AS a
+		WHERE
+			a.idOpDevice = #{idOpDevice}
+		AND a.midOpWorkOrder = #{midOpWorkOrder}
+		AND a.statusOpCardOperation = 'rd'
+		AND a.tag = "n"
+		AND a.tag != 'd'
+	</select>
+	<!-- 查询关联的工单的中间表状态（已还牌rd）的 -->
+	<select id="selectOpWorkOrder" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT
+			id
+		FROM
+			opWorkOrderCard AS a
+		WHERE
+			a.midOpWorkOrder = #{midOpWorkOrder}
+		AND a.idOpDevice = #{idOpDevice}
+		AND a.tag = "n"
+		AND a.tag != 'd'
+	</select>
+	
+	
+	<select id="selectOpWorkOrderCardList" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT
+			a.id,a.idOpWorkOrder
+		FROM
+			opWorkOrderCard AS a
+		WHERE
+			a.midOpWorkOrder = #{midOpWorkOrder} AND a.tag != 'd' 
+	</select>
+	
+	<select id="returnTheOpWorkOrderGrantCard" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT a.statusOpCardOperation FROM opWorkOrderCard AS a WHERE a.idOpWorkOrder = #{idOpWorkOrder} AND a.tag != 'd'
+	</select>
+	
+<!-- 删除对工单关联的所有工单中单表 -->
+	<delete id="deleteByMidOpWrokOrder" parameterType="java.lang.Object">
+		DELETE FROM opWorkOrderCard
+		WHERE
+			idOpWorkOrder IN 
+			<foreach collection="listOpWorkOrder" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>
+	</delete>
+	
+	<!-- 驳回工单对应的工单中单表 -->
+	<update id="updateByMidOpWrokOrder" parameterType="java.lang.Object">
+		UPDATE 
+			opWorkOrderCard o
+		SET 
+			o.statusOpCardOperation = 're',
+			o.modifiedDate = NOW(),
+			o.modifiedUser = #{modifiedUser},
+			o.modifiedIp = #{modifiedIp},
+			o.idOpDevice = 0,
+			<!-- o.midOpWorkOrder = 0, -->
+			o.tag = 'd'
+		WHERE
+			o.id IN
+			<foreach collection="listOpWorkOrderCard" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>			
+	</update>	
+	
+	<!-- 取得无副牌的设备以及设备工单中间表 -->
+	<select id="selectOpWorkOrderCardCountSubZero" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT DISTINCT
+			oc.id,
+			oc.idOpDevice,
+			oc.typeOpCardOperation,
+			oc.idOpWorkOrder,
+			oc.midOpWorkOrder
+		FROM 
+			opWorkOrderCard oc
+		LEFT JOIN opDevice od ON od.id = oc.idOpDevice
+		WHERE
+			oc.idOpWorkOrder = #{idOpWorkOrder} 
+		AND
+			od.countSubOpCard = 0
+	</select>	
+	
+	<!-- 查询主工单下还有副工单的工单设备中单表 -->
+	<select id="selectOpWorkOrderCardCountSubLargerThanOne" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT DISTINCT
+			oc.id,
+			oc.idOpDevice,
+			oc.typeOpCardOperation,
+			oc.idOpWorkOrder,
+			oc.midOpWorkOrder
+		FROM 
+			opWorkOrderCard oc
+		LEFT JOIN opDevice od ON od.id = oc.idOpDevice
+		WHERE
+			oc.typeOpCardOperation = 'm'
+		AND		
+			oc.idOpWorkOrder = #{idOpWorkOrder} 
+		AND
+			od.countSubOpCard > 0
+	</select>	
+	
+	<!-- 查询当前工单对应的副工单(副牌大于1的情况下一定会有副工单) -->
+	<select id="selectOpWorkOrderCardCountSubDetail" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT DISTINCT
+			oc.id,
+			oc.idOpDevice,
+			oc.typeOpCardOperation,
+			oc.idOpWorkOrder,
+			oc.midOpWorkOrder
+		FROM 
+			opWorkOrderCard oc
+		LEFT JOIN opDevice od ON od.id = oc.idOpDevice
+		WHERE
+			oc.typeOpCardOperation = 'd'
+		AND		
+			oc.midOpWorkOrder = #{idOpWorkOrder} 
+		AND
+			od.countSubOpCard > 0
+		GROUP BY od.id			
+	</select>
+	
+	<!-- 从副工单中找出一条记录变更为主工单 -->
+	<update id="updateByMidOpWrokOrderSubCard" parameterType="java.lang.Object">
+		UPDATE 
+			opWorkOrderCard oc, opDevice od
+		SET 
+			oc.midOpWorkOrder = oc.idOpWorkOrder,
+			oc.typeOpCardOperation = 'm',
+			oc.modifiedDate = NOW(),
+			oc.modifiedUser = #{modifiedUser},
+			oc.modifiedIp = #{modifiedIp},
+			
+			od.midOpWorkOrder = oc.idOpWorkOrder,
+			od.midOpWorkOrderCard = oc.id,
+			od.countSubOpCard = (od.countSubOpCard - 1),
+			od.modifiedDate = NOW(),
+			od.modifiedUser = #{modifiedUser},
+			od.modifiedIp = #{modifiedIp}	
+		WHERE 
+			od.id = oc.idOpDevice
+		AND
+			oc.id IN
+			<foreach collection="listOpWorkOrderCard" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>		
+	</update>
+	
+	<!-- 查询为副牌的设备 -->
+	<select id="selectOpWorkOrderCardCountSubSecond" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT DISTINCT
+			oc.id,
+			oc.idOpDevice,
+			oc.typeOpCardOperation,
+			oc.idOpWorkOrder,
+			oc.midOpWorkOrder
+		FROM 
+			opWorkOrderCard oc
+		LEFT JOIN opDevice od ON od.id = oc.idOpDevice
+		WHERE
+			oc.typeOpCardOperation = 'd'
+		AND
+			oc.idOpWorkOrder = #{idOpWorkOrder} 
+		AND
+			od.midOpWorkOrder != #{idOpWorkOrder} 
+		AND
+			od.countSubOpCard > 0		
+	</select>
+	
+	<!-- 如果为副牌数量减1即可 -->
+	<update id="updateByMidOpWrokOrderSubSecond" parameterType="java.lang.Object">
+		UPDATE 
+			opWorkOrderCard oc, opDevice od
+		SET 
+			oc.statusOpCardOperation = 're',
+			oc.modifiedDate = NOW(),
+			oc.modifiedUser = #{modifiedUser},
+			oc.modifiedIp = #{modifiedIp},
+			oc.idOpDevice = 0,
+			oc.midOpWorkOrder = 0,
+			<!-- 
+			oc.idOpWorkOrder = 0,	 
+			-->
+			oc.tag = 'd',
+			od.countSubOpCard = (od.countSubOpCard - 1),
+			od.modifiedDate = NOW(),
+			od.modifiedUser = #{modifiedUser},
+			od.modifiedIp = #{modifiedIp}	
+		WHERE 
+			od.id = oc.idOpDevice
+		AND
+			oc.id IN
+			<foreach collection="listOpWorkOrderCard" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>		
+	</update>
+	
+	<!-- 设备送电后,逻辑删除工单中间表 -->
+	<update id="updateByOpDeviceOn" parameterType="java.lang.Object">
+		UPDATE 
+			opWorkOrderCard oc
+		SET 
+			oc.modifiedDate = NOW(),
+			oc.modifiedUser = #{modifiedUser},
+			oc.modifiedIp = #{modifiedIp},
+			oc.tag = 'd'
+		WHERE 
+			od.id = oc.idOpDevice
+		AND
+			oc.id IN
+			<foreach collection="listOpWorkOrderCard" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>		
+	</update>
+</mapper>

@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpCardOperationMapper" > 
+	<resultMap type="com.framework.bean.impl.OpCardOperationImpl" id="opCardOperation"/> 
+	<!-- 添加实体对象 -->
+	<insert id="insert" parameterType="java.lang.Object">
+		INSERT INTO opCardOperation
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="uid != null">
+					uid,
+				</if>
+				<if test="idMaCompany != null">
+					idMaCompany,
+				</if>
+				<if test="idOpRoomOperation != null">
+					idOpRoomOperation,
+				</if>
+				<if test="idOpRoomElectric != null">
+					idOpRoomElectric,
+				</if>
+				<if test="idOpDevice != null">
+					idOpDevice,
+				</if>
+				<if test="countMain != null">
+					countMain,
+				</if>
+				<if test="countSub != null">
+					countSub,
+				</if>
+				<if test="count != null">
+					count,
+				</if>
+				<if test="status != null">
+					status,
+				</if>
+				<if test="tag != null">
+					tag,
+				</if>
+				<if test="createUser != null">
+					createUser,
+				</if>
+				<if test="createDate != null">
+					createDate,
+				</if>
+				<if test="createIp != null">
+					createIp,
+				</if>
+				<if test="modifiedUser != null">
+					modifiedUser,
+				</if>
+				<if test="modifiedDate != null">
+					modifiedDate,
+				</if>
+				<if test="modifiedIp != null">
+					modifiedIp,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="uid != null">
+					#{uid},
+				</if>
+				<if test="idMaCompany != null">
+					#{idMaCompany},
+				</if>
+				<if test="idOpRoomOperation != null">
+					#{idOpRoomOperation},
+				</if>
+				<if test="idOpRoomElectric != null">
+					#{idOpRoomElectric},
+				</if>
+				<if test="idOpDevice != null">
+					#{idOpDevice},
+				</if>
+				<if test="countMain != null">
+					#{countMain},
+				</if>
+				<if test="countSub != null">
+					#{countSub},
+				</if>
+				<if test="count != null">
+					#{count},
+				</if>
+				<if test="status != null">
+					#{status},
+				</if>
+				<if test="tag != null">
+					#{tag},
+				</if>
+				<if test="createUser != null">
+					#{createUser},
+				</if>
+				<if test="createDate != null">
+					#{createDate},
+				</if>
+				<if test="createIp != null">
+					#{createIp},
+				</if>
+				<if test="modifiedUser != null">
+					#{modifiedUser},
+				</if>
+				<if test="modifiedDate != null">
+					#{modifiedDate},
+				</if>
+				<if test="modifiedIp != null">
+					#{modifiedIp},
+				</if>
+			</trim>
+			<selectKey resultType="long" keyProperty="id">
+				SELECT LAST_INSERT_ID() AS ID
+			</selectKey>
+	</insert>
+
+	<!-- 删除实体对象 -->
+	<delete id="delete" parameterType="java.lang.Object">
+		DELETE FROM opCardOperation
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpRoomOperation != null and idOpRoomOperation != ''">
+				AND idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null and idOpRoomElectric != ''">
+				AND idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND idOpDevice = #{idOpDevice}
+			</if>
+			<if test="countMain != null and countMain != ''">
+				AND countMain = #{countMain}
+			</if>
+			<if test="countSub != null and countSub != ''">
+				AND countSub = #{countSub}
+			</if>
+			<if test="count != null and count != ''">
+				AND count = #{count}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.searchWhere"/>
+		</where>
+	</delete>
+
+	<!-- 更新实体对象 -->
+	<update id="update" parameterType="java.lang.Object">
+		UPDATE opCardOperation
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="uid != null">
+				uid = #{uid},
+			</if>
+			<if test="idMaCompany != null">
+				idMaCompany = #{idMaCompany},
+			</if>
+			<if test="idOpRoomOperation != null">
+				idOpRoomOperation = #{idOpRoomOperation},
+			</if>
+			<if test="idOpRoomElectric != null">
+				idOpRoomElectric = #{idOpRoomElectric},
+			</if>
+			<if test="idOpDevice != null">
+				idOpDevice = #{idOpDevice},
+			</if>
+			<if test="countMain != null">
+				countMain = #{countMain},
+			</if>
+			<if test="countSub != null">
+				countSub = #{countSub},
+			</if>
+			<if test="count != null">
+				count = #{count},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="tag != null">
+				tag = #{tag},
+			</if>
+			<if test="createUser != null">
+				createUser = #{createUser},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate},
+			</if>
+			<if test="createIp != null">
+				createIp = #{createIp},
+			</if>
+			<if test="modifiedUser != null">
+				modifiedUser = #{modifiedUser},
+			</if>
+			<if test="modifiedDate != null">
+				modifiedDate = #{modifiedDate},
+			</if>
+			<if test="modifiedIp != null">
+				modifiedIp = #{modifiedIp},
+			</if>
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.updateColumn"/>
+		</set>
+		WHERE
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.updateWhere"/>
+			<if test="original != null">
+				 AND modified = #{original}
+			</if>
+	</update>
+
+	<!-- 查询单个实体对象 -->
+	<select id="get" parameterType="java.lang.Object" resultMap="opCardOperation">
+		SELECT 
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.getColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idOpRoomOperation, 
+			a.idOpRoomElectric, 
+			a.idOpDevice, 
+			a.countMain, 
+			a.countSub, 
+			a.count, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opCardOperation AS a
+		<include refid="com.framework.dao.OpCardOperationConditionMapper.getFrom"/>
+		<where>
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpRoomOperation != null">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="idOpDevice != null">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="countMain != null">
+				AND a.countMain = #{countMain}
+			</if>
+			<if test="countSub != null">
+				AND a.countSub = #{countSub}
+			</if>
+			<if test="count != null">
+				AND a.count = #{count}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.getWhere"/>
+		</where>
+		LIMIT 1
+	</select>
+
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="opCardOperation">
+		SELECT 
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idOpRoomOperation, 
+			a.idOpRoomElectric, 
+			a.idOpDevice, 
+			a.countMain, 
+			a.countSub, 
+			a.count, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opCardOperation AS a
+		<include refid="com.framework.dao.OpCardOperationConditionMapper.searchFrom"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpRoomOperation != null and idOpRoomOperation != ''">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null and idOpRoomElectric != ''">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="countMain != null and countMain != ''">
+				AND a.countMain = #{countMain}
+			</if>
+			<if test="countSub != null and countSub != ''">
+				AND a.countSub = #{countSub}
+			</if>
+			<if test="count != null and count != ''">
+				AND a.count = #{count}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.searchWhere"/>
+		</where>
+		<if test="group != null">
+			GROUP BY ${group}
+		</if>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		<if test="rows != 0">
+			LIMIT ${startIndex}, ${rows}
+		</if>
+	</select>
+
+	<!-- 查询实体对象记录数 -->
+	<select id="count" parameterType="java.lang.Object" resultType="int">
+		SELECT COUNT(1) FROM opCardOperation AS a
+		<include refid="com.framework.dao.OpCardOperationConditionMapper.searchFrom"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpRoomOperation != null and idOpRoomOperation != ''">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null and idOpRoomElectric != ''">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="countMain != null and countMain != ''">
+				AND a.countMain = #{countMain}
+			</if>
+			<if test="countSub != null and countSub != ''">
+				AND a.countSub = #{countSub}
+			</if>
+			<if test="count != null and count != ''">
+				AND a.count = #{count}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.searchWhere"/>
+		</where>
+	</select>
+
+	<!-- 查询实体分页对象集合 -->
+	<select id="selectPage" parameterType="java.lang.Object" resultMap="opCardOperation">
+		SELECT 
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idOpRoomOperation, 
+			a.idOpRoomElectric, 
+			a.idOpDevice, 
+			a.countMain, 
+			a.countSub, 
+			a.count, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opCardOperation AS a
+		<include refid="com.framework.dao.OpCardOperationConditionMapper.searchFrom"/>
+		<where>
+			a.tag != 'd' AND ${sqlWhere}
+		</where>
+		ORDER BY ${orderBy}
+	</select>
+
+	<!-- 查询树形结构 -->
+	<select id="selectTree" parameterType="java.lang.Object" resultMap="opCardOperation" resultType="java.util.HashMap">
+		SELECT 
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.selectTreeColumn"/>
+			a.id AS value,
+			a.name AS title
+		FROM opCardOperation AS a
+		<include refid="com.framework.dao.OpCardOperationConditionMapper.selectTreeFrom"/>
+		<where>
+				a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpRoomOperation != null">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="idOpDevice != null">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="countMain != null">
+				AND a.countMain = #{countMain}
+			</if>
+			<if test="countSub != null">
+				AND a.countSub = #{countSub}
+			</if>
+			<if test="count != null">
+				AND a.count = #{count}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpCardOperationConditionMapper.selectTreeWhere"/>
+		</where>
+	</select>
+
+</mapper>

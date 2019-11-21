@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpDeviceConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.OpDeviceImpl" id="opDevice"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		IFNULL(b.name, '') nameOpRoomOperation,
+		IFNULL(c.name, '') nameOpRoomElectric,	
+		IFNULL(d.name, '') nameOpDeviceCabinet,	
+		IFNULL(e.name, '') nameStatus,	
+		
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN opRoomOperation AS b ON b.id = a.idOpRoomOperation
+		LEFT JOIN opRoomElectric AS c ON c.id = a.idOpRoomElectric		
+		LEFT JOIN opDeviceCabinet AS d ON d.id = a.idOpDeviceCabinet		
+		LEFT JOIN syStatusDetail AS e ON (e.codeSyStatus = 'kgzt' AND e.value = a.status)
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+	
+	<!-- 主电室设备 -->
+	<select id="getOpWorkOderToDevice" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT * FROM opDevice AS a LEFT JOIN opWorkOrderCard AS b ON a.id = b.idOpDevice 
+		WHERE b.idOpWorkOrder = #{idOpWorkOrder} AND a.idOpRoomElectric = #{idOpRoomElectric} AND a.tag != 'd' 
+	</select>
+	
+	<!-- 操作室设备 -->
+	<select id="getOpWorkOderToOpration" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT * FROM opDevice AS a LEFT JOIN opWorkOrderCard AS b ON a.id = b.idOpDevice 
+		WHERE b.idOpWorkOrder = #{idOpWorkOrder} AND a.idOpRoomOperation = #{idOpRoomOperation} AND a.tag != 'd' 
+	</select>
+	
+	<update id="updateCabinetDevice" parameterType="java.lang.Object">
+		UPDATE 
+			opDevice o
+		SET 
+			o.`status` = #{status}
+		WHERE
+			o.idOpDeviceCabinet = #{idOpDeviceCabinet}
+		AND
+			o.id IN 
+			<foreach collection="strArr" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	</update>
+	
+	<update id="updateCabinetDeviceOn" parameterType="java.lang.Object">
+		UPDATE 
+			opDevice o, opDeviceElectricianCard e
+		SET 
+			o.`status` = 'on',
+			o.midOpWorkOrderCard = #{midOpWorkOrderCard},
+			o.statusOpRoomOperation = 
+				(
+					CASE WHEN 
+						o.statusOpRoomOperation != 'ws'
+					THEN 
+						#{statusOpRoomOperation}
+					ELSE
+						'ws'
+					END
+				),
+			o.statusOpRoomElectric = #{statusOpRoomElectric},
+			o.countSubOpCard = #{countSubOpCard},
+			o.countOpCard = #{countOpCard},
+			o.midOpWorkOrder = #{midOpWorkOrder},
+			o.countMainOpCard = #{countMainOpCard},
+			e.statusElectrician = 'or'		
+		WHERE
+			e.statusElectrician = 'po'
+		AND
+			o.id = e.idOpDevice
+		AND				
+			o.idOpDeviceCabinet = #{idOpDeviceCabinet}
+		AND
+			o.id IN 
+			<foreach collection="strArr" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	</update>
+	
+	<update id="updateCabinetDeviceOff" parameterType="java.lang.Object">
+		UPDATE 
+			opDevice o, opDeviceElectricianCard e
+		SET 
+			o.`status` = 'of',
+			e.statusElectrician = 'or'
+		WHERE
+			e.statusElectrician = 'wo'
+		AND
+			o.id = e.idOpDevice
+		AND		
+			o.idOpDeviceCabinet = #{idOpDeviceCabinet}
+		AND
+			o.id IN 
+			<foreach collection="strArr" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	</update>
+	<!-- 查询主电室状态为sd已发牌的设备主键及主工单 -->
+	<select id="selectOpDevice" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			a.id,a.midOpWorkOrder
+		FROM
+			opDevice AS a
+		WHERE
+			a.tag != 'd' 
+			<!-- 
+		AND a.statusOpRoomOperation = 'wr'
+		 -->
+		AND a.statusOpRoomElectric = 'sd'
+	</select>
+	
+	<!-- 查询还牌时工单所包含的设备 -->
+	<select id="selectOpWorkOrderContainsDevice" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			a.id,
+			a.statusOpRoomOperation
+		FROM
+			opDevice AS a
+		LEFT JOIN opWorkOrderCard AS c ON c.midOpWorkOrder = a.midOpWorkOrder
+		LEFT JOIN opWorkOrder AS b ON c.idOpWorkOrder = b.id
+		WHERE
+			b.id = #{id} AND a.tag != 'd' 
+		GROUP BY a.id
+	</select>
+	
+	<select id="getAllDevice" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT * FROM opDevice AS a LEFT JOIN opWorkOrderCard AS b ON a.id = b.idOpDevice LEFT JOIN opWorkOrder AS c ON c.id = b.idOpWorkOrder WHERE a.tag != 'd'  AND c.id = #{midOpWorkOrder}
+	</select>
+	
+	<select id="getAllDeviceLog" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			a.id,a.idMaCompany,a.name,a.code
+		FROM
+			opDevice AS a
+		LEFT JOIN opWorkOrderCard AS b ON a.id = b.idOpDevice
+		LEFT JOIN opWorkOrder AS c ON c.id = b.idOpWorkOrder
+		WHERE
+			a.tag != 'd' AND c.id = #{midOpWorkOrder}
+	</select>
+	
+	<select id="getTheDeviceToOpWorkOrder" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT a.id FROM opWorkOrder AS a LEFT JOIN opWorkOrderCard AS b ON a.id=b.idOpWorkOrder LEFT JOIN opDevice AS c ON c.id = b.idOpDevice WHERE a.tag != 'd'  AND c.id =#{id} AND a.status = #{status} AND a.id = #{midOpWorkOrder}
+	</select>
+	
+	<!-- 查询设备主工单 -->
+	<select id="getTheDeviceTomidOpWorkOrder" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT midOpWorkOrder FROM opDevice AS a WHERE a.tag != 'd'  AND a.id =#{id}
+	</select>
+	
+	<!-- 查询需要主电室发牌的设备 -->
+	<select id="selectOpDeviceOpRoom" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			od.id
+		FROM opDevice od
+		LEFT JOIN opWorkOrder ow ON ow.id = od.midOpWorkOrder
+		WHERE
+			od.statusOpRoomOperation = 'sd'
+		AND
+			od.statusOpRoomElectric = 'or'
+		AND
+			ow.countOpCardApply > 0
+		AND 
+		(ow.countOpCardApply - ow.countOpCardSend) = 0
+	</select>
+	
+	<!-- 更新需要主电室发牌的设备 -->
+	<update id="updateOpDeviceOpRoomStatus" parameterType="java.lang.Object">
+		UPDATE 
+			opDevice o
+		SET 
+			o.statusOpRoomElectric = 'ws'
+		WHERE
+			o.statusOpRoomOperation = 'sd'
+		AND
+			o.statusOpRoomElectric = 'or'
+		AND
+			o.id IN 
+			<foreach collection="listOpDevice" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>
+	</update>
+	
+	<!-- 拒绝工单时查询状态为at -->
+	<select id="findTheOpdeviceToOpWorkOrderCard" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			a.id,
+			b.id
+		FROM
+			opDevice AS a
+		LEFT JOIN opWorkOrderCard AS b ON a.id = b.idOpDevice
+		WHERE
+			a.id = #{id}  
+		AND 
+			b.statusOpCardOperation = 'at'  AND a.tag !='d'		
+	</select>
+	
+	<!-- 拒绝工单时查询状态为td -->
+	<select id="findTheOpdeviceToOpWorkOrderCardForTd" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			a.id,
+			b.id
+		FROM
+			opDevice AS a
+		LEFT JOIN opWorkOrderCard AS b ON a.id = b.idOpDevice
+		WHERE
+			a.id = #{id}  
+		AND 
+			b.statusOpCardOperation IN('td')  AND a.tag !='d'		
+	</select>
+	
+	<!-- 查询主电室驳回主工单下的所有设备 -->
+	<select id="searchOpDeviceByMidOpWorkOrder" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT 
+			DISTINCT oc.idOpDevice id
+		FROM 
+			opWorkOrder ow
+		LEFT JOIN opWorkOrderCard oc ON oc.idOpWorkOrder = ow.id
+		WHERE 
+			oc.midOpWorkOrder = #{idOpWorkOrder}
+
+	</select>
+	
+	<!-- 初始化主电室驳回主工单下的设备 -->
+	<update id="updateOpDeviceRejectByMidOpWorkOrder" parameterType="java.lang.Object">
+		UPDATE opDevice o
+		SET
+			o.midOpWorkOrder = 0,
+			o.midOpWorkOrderCard = 0,
+			o.statusOpRoomOperation = 'or',
+			o.statusOpRoomElectric = 'or',
+			o.countSubOpCard = 0,
+			o.countOpCard = 0,
+			o.countMainOpCard = 0
+		WHERE
+			o.id IN 
+			<if test="listOpDevice != null">
+				<foreach collection="listOpDevice" item="item" index="index" open="(" separator="," close=")">
+					#{item.id}
+				</foreach>
+			</if>
+			<if test="listOpWorkOrderCard != null">
+				<foreach collection="listOpWorkOrderCard" item="item" index="index" open="(" separator="," close=")">
+					#{item.idOpDevice}
+				</foreach>
+			</if>
+	</update>
+	
+	<!-- 查询操作室驳回工单对应的所有设备 -->
+	<select id="searchOpDeviceByOpRoomOperation" parameterType="java.lang.Object" resultMap="opDevice">
+		SELECT
+			od.*
+		FROM
+			opDevice od
+		LEFT JOIN opWorkOrderCard oc ON oc.idOpDevice = od.id
+		WHERE
+			od.countMainOpCard = 0		
+		AND
+			oc.idOpWorkOrder = #{idOpWorkOrder}
+
+	</select>
+	
+	<!-- 初始化主电室驳回主工单下的设备 -->
+	<update id="updateOpDeviceByOpRoomOperation" parameterType="java.lang.Object">
+		UPDATE opDevice o
+		SET
+			o.midOpWorkOrder = 0,
+			o.midOpWorkOrderCard = 0,
+			o.statusOpRoomOperation = 'or',
+			o.statusOpRoomElectric = 'or',
+			o.countSubOpCard = 0,
+			o.countOpCard = 0,
+			o.countMainOpCard = 0
+		WHERE
+			o.id IN 
+			<if test="listOpDevice != null">
+				<foreach collection="listOpDevice" item="item" index="index" open="(" separator="," close=")">
+					#{item.id}
+				</foreach>
+			</if>
+			<if test="listOpWorkOrderCard != null">
+				<foreach collection="listOpWorkOrderCard" item="item" index="index" open="(" separator="," close=")">
+					#{item.idOpDevice}
+				</foreach>
+			</if>
+	</update>
+</mapper>

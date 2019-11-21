@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpWorkOrderEmployeeConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.OpWorkOrderEmployeeImpl" id="opWorkOrderEmployee"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+	<select id="selectEmployeeWorkTimeDetail" parameterType="java.lang.Object" resultMap="opWorkOrderEmployee">
+		SELECT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a.idOpWorkOrder,
+			a.idMaUser,
+			a.nameMaUser,
+			a.codeMaRole,
+			a.hours,
+			a.remark,
+			a.STATUS,
+			a.tag
+		FROM
+			opWorkOrderEmployee AS a 
+		WHERE 
+			a.idOpWorkOrder = #{idOpWorkOrder} 
+			AND a.tag != 'd'
+	</select>
+</mapper>

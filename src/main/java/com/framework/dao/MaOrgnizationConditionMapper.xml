@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.MaOrgnizationConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.MaOrgnizationImpl" id="maOrgnization"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		IFNULL(b.name, '') nameMaCompany, 
+		IFNULL(c.name, '') namePareantOrg,
+		IFNULL(d.name, '') nameMaOrgnizationLevel,
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN maCompany AS b ON b.id = a.idMaCompany
+		LEFT JOIN maOrgnization AS c ON c.id = a.pidMaOrgnization
+		LEFT JOIN maOrgnizationLevel AS d ON d.id = a.idMaOrgnizationLevel
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+	
+	<select id="findListByPid" parameterType="java.lang.Object" resultType="java.util.HashMap">
+		SELECT 
+			a.id value,
+			a.name title
+		FROM 
+			maOrgnization AS a
+        WHERE
+        	a.tag != 'd' 
+        AND
+        	a.pidMaOrgnization = #{pid}
+	</select>	
+	
+	<select id="findTree" parameterType="java.lang.Object" resultType="java.util.HashMap">
+		SELECT 
+			a.id value,
+			a.name title
+		FROM 
+			maOrgnization AS a
+        <where>
+        	a.tag != 'd' 
+        AND        
+        	pidMaOrgnization = #{pidMaOrgnization}
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if> 
+		</where>     	
+	</select>	
+	
+	<select id="findOrgTree"  resultType="java.util.HashMap">
+		SELECT 
+			a.id value,
+			a.pidMaOrgnization pid,
+			a.name title
+		FROM 
+			maOrgnization AS a
+        <where>			
+        	a.tag != 'd' 
+        </where>	
+	</select>
+	
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>	
+	
+	<!-- 查询:车间 工段  -->
+	<select id="selectOrgTree" parameterType="java.lang.Object" resultMap="maOrgnization" resultType="java.util.HashMap">
+			SELECT id,name FROM maOrgnization
+		<where>			
+			idMaCompany = #{idMaCompany} AND pidMaOrgnization = #{pidMaOrgnization} AND tag = 'n' AND status = 'e' ORDER BY id ASC
+		</where>
+	</select>
+	
+	<!-- 主电室发牌时查询电工人员信息 -->
+	<select id="selectElectricianTree" parameterType="java.lang.Object" resultMap="maOrgnization" resultType="java.util.HashMap">
+		SELECT
+			a.id AS cjId,
+			a.name AS cjNm,
+			b.id AS gdId,
+			b.name AS gdNm,
+			b.gz AS gzId,
+			b.gzn AS gzNm,
+			b.uid AS id,
+			b.unm AS name,
+			b.pht AS profilePhoto
+		FROM
+			maOrgnization AS a
+		LEFT JOIN (
+			SELECT
+				c.id,
+				c. NAME,
+				c.pidMaOrgnization,
+				e.id AS gz,
+				e. NAME AS gzn,
+				e.uid,
+				e.unm,
+				e.pht
+			FROM
+				maOrgnization AS c
+			LEFT JOIN (
+				SELECT
+					d.id,
+					d. NAME,
+					d.pidMaOrgnization,
+					g.id AS uid,
+					g. NAME AS unm,
+					g.profilePhoto AS pht
+				FROM
+					maOrgnization AS d
+				LEFT JOIN (
+					SELECT
+						f.id,
+						f. NAME,
+						(
+							CASE
+							WHEN f.profilePhoto IS NULL THEN
+								''
+							ELSE
+								f.profilePhoto
+							END
+						) AS profilePhoto,
+						f.idMaOrgnization
+					FROM
+						maUser AS f
+					WHERE
+						f.tag = 'n'
+					AND f. STATUS = 'e'
+					AND f.codeMaRole = 'el'
+				) AS g ON g.idMaOrgnization = d.id
+				WHERE
+					d.idMaCompany = 3
+				AND d.tag = 'n'
+				AND d. STATUS = 'e'
+				ORDER BY
+					d.id ASC
+			) AS e ON c.id = e.pidMaOrgnization
+			WHERE
+				c.tag = 'n'
+			AND c. STATUS = 'e'
+			ORDER BY
+				c.id ASC
+		) AS b ON a.id = b.pidMaOrgnization
+		WHERE
+			a.idMaCompany = #{idMaCompany}
+		AND a.pidMaOrgnization = 0
+		AND a.tag = 'n'
+		AND a. STATUS = 'e'
+		ORDER BY a.id, gdId ASC
+	</select>
+</mapper>

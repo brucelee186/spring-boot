@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.MaCompanyConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.MaCompanyImpl" id="maCompany"/> 
+	<resultMap type="com.framework.bean.impl.MaOrgnizationLevelImpl" id="maOrgnizationLevel"> 
+		<id property="id" column="idMaOrgnizationLevel" /> 
+		<result property="idMaCompany" column="idMaCompany" />
+		<result property="orgLevelName" column="orgLevelName" /> 
+	</resultMap>
+	<resultMap type="com.framework.bean.impl.MaCompanyImpl" id="maCompanyImpl">
+		<id property="id" column="id"  />
+		<result property="name" column="name" />
+		<result property="tel" column="tel" />
+		<result property="fax" column="fax" />
+		<result property="mail" column="mail" />
+		<result property="webUrl" column="webUrl"/>
+		
+		<result property="value" column="value"/>
+		<result property="title" column="title"/>
+		
+		<collection property="listMaOrgnizationLevel" resultMap="maOrgnizationLevel"></collection>
+	</resultMap> 
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		a.id value,
+		a.name title,
+		b.name orgLevelName,
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN maOrgnizationLevel AS b ON b.idMaCompany = a.id
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+	
+	<select id="findListByPid" parameterType="java.lang.Object" resultType="java.util.HashMap">
+		SELECT 
+			a.id value,
+			a.name title
+		FROM 
+			maCompany AS a
+	</select>	
+	
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="maCompanyImpl">
+		SELECT 
+			a.id, 
+			a.id value,
+			a.name title, 
+			a.id idMaCompany,
+			b.id idMaOrgnizationLevel,
+			b.name orgLevelName
+		FROM 
+			maCompany AS a 
+		LEFT JOIN maOrgnizationLevel AS b ON b.idMaCompany = a.id 
+		WHERE 
+			a.tag != 'd'
+		ORDER BY a.id, b.id 	
+	</select>	
+	
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>	
+</mapper>

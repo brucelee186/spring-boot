@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.MaUserConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.MaUserImpl" id="maUser"/> 
+
+	<sql id="getColumn">
+		<if test="tagMapper == 'getOpRoomOperaion'">
+			b.`name` nameOpRoomOperation,
+		</if>
+		<if test="tagMapper == 'getOpRoomElectric'">
+			c.`name` nameOpRoomElectric,
+		</if>			
+		
+	</sql>
+
+	<sql id="getFrom">
+		<if test="tagMapper == 'getOpRoomOperaion'">
+			LEFT JOIN opRoomOperation b ON (a.codeMaRole = 'ro' AND b.idMaUser = a.id)
+		</if>	
+		<if test="tagMapper == 'getOpRoomElectric'">
+			LEFT JOIN opRoomElectric c ON (a.codeMaRole = 're' AND c.idMaUser = a.id)
+		</if>	
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+
+		
+	</sql>
+
+	<sql id="selectFrom">
+		
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+		<if test="tagMapper == 'selectUserForNotification'">
+			AND id IN 
+			<foreach collection="arrListId" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>		
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		<if test="codeMaRole != null and codeMaRole != ''">
+			AND a.codeMaRole = #{codeMaRole}
+		</if>		
+	</sql>
+
+	<!-- 查询:1点检员 2带班人 -->
+	<select id="selectPreTree" parameterType="java.lang.Object" resultMap="maUser" resultType="java.util.HashMap">
+			SELECT a.id,a.name,(CASE WHEN a.profilePhoto IS NULL THEN '' ELSE a.profilePhoto END) AS profilePhoto FROM maUser AS a
+		<where>
+			a.idMaCompany = #{idMaCompany} AND a.idMaOrgnization = #{idMaOrgnization} AND a.tag = 'n' AND a.status = 'e' 
+			
+			<if test="codeMaRole == 'em'">
+				AND a.codeMaRole IN ('em','le')
+			</if>
+			<if test="codeMaRole != 'em'">
+				AND a.codeMaRole = #{codeMaRole}
+			</if>
+			ORDER BY a.id ASC	
+		</where>
+	</select>
+	
+	<!-- 查询电工级编号下的所有电工 -->
+	<select id="selectOpDeviceGroupUser" parameterType="java.lang.Object" resultMap="maUser">
+		SELECT
+			GROUP_CONCAT(DISTINCT CONCAT(' ', od.name) ORDER BY dc.idOpDevice) groupDeviceCode,
+			mu.*
+		FROM
+			maUser mu 
+		LEFT JOIN opDeviceElectricianCard dc ON dc.idElectrician = mu.id
+		LEFT JOIN opDevice od ON od.id = dc.idOpDevice
+		WHERE
+			dc.idOpDeviceGroup = #{idOpDeviceGroup} 
+		GROUP BY 
+			mu.id;
+	</select>
+	
+	<!-- 查询电工级编号下的所有电工 -->
+	<select id="selectMainWorkOrderLeader" parameterType="java.lang.Object" resultMap="maUser">
+		SELECT 
+			DISTINCT mu.*, ow.id idOpWorkOrder, ow.name nameOpWorkOrder
+		FROM 
+			opWorkOrder ow
+		LEFT JOIN opWorkOrderCard oc ON oc.idOpWorkOrder = ow.id
+		LEFT JOIN maUser mu ON mu.id = oc.idLeader
+		WHERE 
+			oc.midOpWorkOrder = #{midOpWorkOrder}
+		AND 
+			mu.id IS NOT NULL
+		GROUP BY mu.id;
+	</select>
+	
+	
+</mapper>

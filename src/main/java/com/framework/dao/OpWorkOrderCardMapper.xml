@@ -1,0 +1,1083 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpWorkOrderCardMapper" > 
+	<resultMap type="com.framework.bean.impl.OpWorkOrderCardImpl" id="opWorkOrderCard"/> 
+	<!-- 添加实体对象 -->
+	<insert id="insert" parameterType="java.lang.Object">
+		INSERT INTO opWorkOrderCard
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="uid != null">
+					uid,
+				</if>
+				<if test="idMaCompany != null">
+					idMaCompany,
+				</if>
+				<if test="idOpWorkOrder != null">
+					idOpWorkOrder,
+				</if>
+				<if test="midOpWorkOrder != null">
+					midOpWorkOrder,
+				</if>
+				<if test="idOpDevice != null">
+					idOpDevice,
+				</if>
+				<if test="statusOpDevice != null">
+					statusOpDevice,
+				</if>
+				<if test="idOpCardOperation != null">
+					idOpCardOperation,
+				</if>
+				<if test="statusOpCardOperation != null">
+					statusOpCardOperation,
+				</if>
+				<if test="dateSendOpCardOperation != null">
+					dateSendOpCardOperation,
+				</if>
+				<if test="idMaUserOpCardOperation != null">
+					idMaUserOpCardOperation,
+				</if>
+				<if test="idOpCardPower != null">
+					idOpCardPower,
+				</if>
+				<if test="statusOpCardPower != null">
+					statusOpCardPower,
+				</if>
+				<if test="dateSendOpCardPower != null">
+					dateSendOpCardPower,
+				</if>
+				<if test="idMaUserOpCardPower != null">
+					idMaUserOpCardPower,
+				</if>
+				<if test="idOpCardWork != null">
+					idOpCardWork,
+				</if>
+				<if test="statusOpCardWork != null">
+					statusOpCardWork,
+				</if>
+				<if test="dateSendOpCardWork != null">
+					dateSendOpCardWork,
+				</if>
+				<if test="idMaUserOpCardWork != null">
+					idMaUserOpCardWork,
+				</if>
+				<if test="idLeader != null">
+					idLeader,
+				</if>
+				<if test="statusLeader != null">
+					statusLeader,
+				</if>
+				<if test="idOpRoomOperation != null">
+					idOpRoomOperation,
+				</if>
+				<if test="idOpDeviceGroupPowerOff != null">
+					idOpDeviceGroupPowerOff,
+				</if>
+				<if test="idOpDeviceGroupPowerOn != null">
+					idOpDeviceGroupPowerOn,
+				</if>
+				<if test="statusOpRoomOperation != null">
+					statusOpRoomOperation,
+				</if>
+				<if test="idOpRoomElectric != null">
+					idOpRoomElectric,
+				</if>
+				<if test="statusRoomElectric != null">
+					statusRoomElectric,
+				</if>
+				<if test="status != null">
+					status,
+				</if>
+				<if test="typeOpCardOperation != null">
+					typeOpCardOperation,
+				</if>
+				<if test="tag != null">
+					tag,
+				</if>
+				<if test="createUser != null">
+					createUser,
+				</if>
+				<if test="createDate != null">
+					createDate,
+				</if>
+				<if test="createIp != null">
+					createIp,
+				</if>
+				<if test="modifiedUser != null">
+					modifiedUser,
+				</if>
+				<if test="modifiedDate != null">
+					modifiedDate,
+				</if>
+				<if test="modifiedIp != null">
+					modifiedIp,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="uid != null">
+					#{uid},
+				</if>
+				<if test="idMaCompany != null">
+					#{idMaCompany},
+				</if>
+				<if test="idOpWorkOrder != null">
+					#{idOpWorkOrder},
+				</if>
+				<if test="midOpWorkOrder != null">
+					#{midOpWorkOrder},
+				</if>
+				<if test="idOpDevice != null">
+					#{idOpDevice},
+				</if>
+				<if test="statusOpDevice != null">
+					#{statusOpDevice},
+				</if>
+				<if test="idOpCardOperation != null">
+					#{idOpCardOperation},
+				</if>
+				<if test="statusOpCardOperation != null">
+					#{statusOpCardOperation},
+				</if>
+				<if test="dateSendOpCardOperation != null">
+					#{dateSendOpCardOperation},
+				</if>
+				<if test="idMaUserOpCardOperation != null">
+					#{idMaUserOpCardOperation},
+				</if>
+				<if test="idOpCardPower != null">
+					#{idOpCardPower},
+				</if>
+				<if test="statusOpCardPower != null">
+					#{statusOpCardPower},
+				</if>
+				<if test="dateSendOpCardPower != null">
+					#{dateSendOpCardPower},
+				</if>
+				<if test="idMaUserOpCardPower != null">
+					#{idMaUserOpCardPower},
+				</if>
+				<if test="idOpCardWork != null">
+					#{idOpCardWork},
+				</if>
+				<if test="statusOpCardWork != null">
+					#{statusOpCardWork},
+				</if>
+				<if test="dateSendOpCardWork != null">
+					#{dateSendOpCardWork},
+				</if>
+				<if test="idMaUserOpCardWork != null">
+					#{idMaUserOpCardWork},
+				</if>
+				<if test="idLeader != null">
+					#{idLeader},
+				</if>
+				<if test="statusLeader != null">
+					#{statusLeader},
+				</if>
+				<if test="idOpRoomOperation != null">
+					#{idOpRoomOperation},
+				</if>
+				<if test="idOpDeviceGroupPowerOff != null">
+					#{idOpDeviceGroupPowerOff},
+				</if>
+				<if test="idOpDeviceGroupPowerOn != null">
+					#{idOpDeviceGroupPowerOn},
+				</if>
+				<if test="statusOpRoomOperation != null">
+					#{statusOpRoomOperation},
+				</if>
+				<if test="idOpRoomElectric != null">
+					#{idOpRoomElectric},
+				</if>
+				<if test="statusRoomElectric != null">
+					#{statusRoomElectric},
+				</if>
+				<if test="status != null">
+					#{status},
+				</if>
+				<if test="typeOpCardOperation != null">
+					#{typeOpCardOperation},
+				</if>
+				<if test="tag != null">
+					#{tag},
+				</if>
+				<if test="createUser != null">
+					#{createUser},
+				</if>
+				<if test="createDate != null">
+					#{createDate},
+				</if>
+				<if test="createIp != null">
+					#{createIp},
+				</if>
+				<if test="modifiedUser != null">
+					#{modifiedUser},
+				</if>
+				<if test="modifiedDate != null">
+					#{modifiedDate},
+				</if>
+				<if test="modifiedIp != null">
+					#{modifiedIp},
+				</if>
+			</trim>
+			<selectKey resultType="long" keyProperty="id">
+				SELECT LAST_INSERT_ID() AS ID
+			</selectKey>
+	</insert>
+
+	<!-- 删除实体对象 -->
+	<delete id="delete" parameterType="java.lang.Object">
+		DELETE FROM opWorkOrderCard
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpWorkOrder != null and idOpWorkOrder != ''">
+				AND idOpWorkOrder = #{idOpWorkOrder}
+			</if>
+			<if test="midOpWorkOrder != null and midOpWorkOrder != ''">
+				AND midOpWorkOrder = #{midOpWorkOrder}
+			</if>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND idOpDevice = #{idOpDevice}
+			</if>
+			<if test="statusOpDevice != null and statusOpDevice != ''">
+				AND statusOpDevice = #{statusOpDevice}
+			</if>
+			<if test="idOpCardOperation != null and idOpCardOperation != ''">
+				AND idOpCardOperation = #{idOpCardOperation}
+			</if>
+			<if test="statusOpCardOperation != null and statusOpCardOperation != ''">
+				AND statusOpCardOperation = #{statusOpCardOperation}
+			</if>
+			<if test="dateSendOpCardOperation != null and dateSendOpCardOperation != ''">
+				AND dateSendOpCardOperation = #{dateSendOpCardOperation}
+			</if>
+			<if test="idMaUserOpCardOperation != null and idMaUserOpCardOperation != ''">
+				AND idMaUserOpCardOperation = #{idMaUserOpCardOperation}
+			</if>
+			<if test="idOpCardPower != null and idOpCardPower != ''">
+				AND idOpCardPower = #{idOpCardPower}
+			</if>
+			<if test="statusOpCardPower != null and statusOpCardPower != ''">
+				AND statusOpCardPower = #{statusOpCardPower}
+			</if>
+			<if test="dateSendOpCardPower != null and dateSendOpCardPower != ''">
+				AND dateSendOpCardPower = #{dateSendOpCardPower}
+			</if>
+			<if test="idMaUserOpCardPower != null and idMaUserOpCardPower != ''">
+				AND idMaUserOpCardPower = #{idMaUserOpCardPower}
+			</if>
+			<if test="idOpCardWork != null and idOpCardWork != ''">
+				AND idOpCardWork = #{idOpCardWork}
+			</if>
+			<if test="statusOpCardWork != null and statusOpCardWork != ''">
+				AND statusOpCardWork = #{statusOpCardWork}
+			</if>
+			<if test="dateSendOpCardWork != null and dateSendOpCardWork != ''">
+				AND dateSendOpCardWork = #{dateSendOpCardWork}
+			</if>
+			<if test="idMaUserOpCardWork != null and idMaUserOpCardWork != ''">
+				AND idMaUserOpCardWork = #{idMaUserOpCardWork}
+			</if>
+			<if test="idLeader != null and idLeader != ''">
+				AND idLeader = #{idLeader}
+			</if>
+			<if test="statusLeader != null and statusLeader != ''">
+				AND statusLeader = #{statusLeader}
+			</if>
+			<if test="idOpRoomOperation != null and idOpRoomOperation != ''">
+				AND idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpDeviceGroupPowerOff != null and idOpDeviceGroupPowerOff != ''">
+				AND idOpDeviceGroupPowerOff = #{idOpDeviceGroupPowerOff}
+			</if>
+			<if test="idOpDeviceGroupPowerOn != null and idOpDeviceGroupPowerOn != ''">
+				AND idOpDeviceGroupPowerOn = #{idOpDeviceGroupPowerOn}
+			</if>
+			<if test="statusOpRoomOperation != null and statusOpRoomOperation != ''">
+				AND statusOpRoomOperation = #{statusOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null and idOpRoomElectric != ''">
+				AND idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="statusRoomElectric != null and statusRoomElectric != ''">
+				AND statusRoomElectric = #{statusRoomElectric}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="typeOpCardOperation != null and typeOpCardOperation != ''">
+				AND typeOpCardOperation = #{typeOpCardOperation}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.searchWhere"/>
+		</where>
+	</delete>
+
+	<!-- 更新实体对象 -->
+	<update id="update" parameterType="java.lang.Object">
+		UPDATE opWorkOrderCard
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="uid != null">
+				uid = #{uid},
+			</if>
+			<if test="idMaCompany != null">
+				idMaCompany = #{idMaCompany},
+			</if>
+			<if test="idOpWorkOrder != null">
+				idOpWorkOrder = #{idOpWorkOrder},
+			</if>
+			<if test="midOpWorkOrder != null">
+				midOpWorkOrder = #{midOpWorkOrder},
+			</if>
+			<if test="idOpDevice != null">
+				idOpDevice = #{idOpDevice},
+			</if>
+			<if test="statusOpDevice != null">
+				statusOpDevice = #{statusOpDevice},
+			</if>
+			<if test="idOpCardOperation != null">
+				idOpCardOperation = #{idOpCardOperation},
+			</if>
+			<if test="statusOpCardOperation != null">
+				statusOpCardOperation = #{statusOpCardOperation},
+			</if>
+			<if test="dateSendOpCardOperation != null">
+				dateSendOpCardOperation = #{dateSendOpCardOperation},
+			</if>
+			<if test="idMaUserOpCardOperation != null">
+				idMaUserOpCardOperation = #{idMaUserOpCardOperation},
+			</if>
+			<if test="idOpCardPower != null">
+				idOpCardPower = #{idOpCardPower},
+			</if>
+			<if test="statusOpCardPower != null">
+				statusOpCardPower = #{statusOpCardPower},
+			</if>
+			<if test="dateSendOpCardPower != null">
+				dateSendOpCardPower = #{dateSendOpCardPower},
+			</if>
+			<if test="idMaUserOpCardPower != null">
+				idMaUserOpCardPower = #{idMaUserOpCardPower},
+			</if>
+			<if test="idOpCardWork != null">
+				idOpCardWork = #{idOpCardWork},
+			</if>
+			<if test="statusOpCardWork != null">
+				statusOpCardWork = #{statusOpCardWork},
+			</if>
+			<if test="dateSendOpCardWork != null">
+				dateSendOpCardWork = #{dateSendOpCardWork},
+			</if>
+			<if test="idMaUserOpCardWork != null">
+				idMaUserOpCardWork = #{idMaUserOpCardWork},
+			</if>
+			<if test="idLeader != null">
+				idLeader = #{idLeader},
+			</if>
+			<if test="statusLeader != null">
+				statusLeader = #{statusLeader},
+			</if>
+			<if test="idOpRoomOperation != null">
+				idOpRoomOperation = #{idOpRoomOperation},
+			</if>
+			<if test="idOpDeviceGroupPowerOff != null">
+				idOpDeviceGroupPowerOff = #{idOpDeviceGroupPowerOff},
+			</if>
+			<if test="idOpDeviceGroupPowerOn != null">
+				idOpDeviceGroupPowerOn = #{idOpDeviceGroupPowerOn},
+			</if>
+			<if test="statusOpRoomOperation != null">
+				statusOpRoomOperation = #{statusOpRoomOperation},
+			</if>
+			<if test="idOpRoomElectric != null">
+				idOpRoomElectric = #{idOpRoomElectric},
+			</if>
+			<if test="statusRoomElectric != null">
+				statusRoomElectric = #{statusRoomElectric},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="typeOpCardOperation != null">
+				typeOpCardOperation = #{typeOpCardOperation},
+			</if>
+			<if test="tag != null">
+				tag = #{tag},
+			</if>
+			<if test="createUser != null">
+				createUser = #{createUser},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate},
+			</if>
+			<if test="createIp != null">
+				createIp = #{createIp},
+			</if>
+			<if test="modifiedUser != null">
+				modifiedUser = #{modifiedUser},
+			</if>
+			<if test="modifiedDate != null">
+				modifiedDate = #{modifiedDate},
+			</if>
+			<if test="modifiedIp != null">
+				modifiedIp = #{modifiedIp},
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.updateColumn"/>
+		</set>
+		WHERE
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.updateWhere"/>
+			<if test="original != null">
+				 AND modified = #{original}
+			</if>
+	</update>
+
+	<!-- 查询单个实体对象 -->
+	<select id="get" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.getColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idOpWorkOrder, 
+			a.midOpWorkOrder, 
+			a.idOpDevice, 
+			a.statusOpDevice, 
+			a.idOpCardOperation, 
+			a.statusOpCardOperation, 
+			a.dateSendOpCardOperation, 
+			a.idMaUserOpCardOperation, 
+			a.idOpCardPower, 
+			a.statusOpCardPower, 
+			a.dateSendOpCardPower, 
+			a.idMaUserOpCardPower, 
+			a.idOpCardWork, 
+			a.statusOpCardWork, 
+			a.dateSendOpCardWork, 
+			a.idMaUserOpCardWork, 
+			a.idLeader, 
+			a.statusLeader, 
+			a.idOpRoomOperation, 
+			a.idOpDeviceGroupPowerOff, 
+			a.idOpDeviceGroupPowerOn, 
+			a.statusOpRoomOperation, 
+			a.idOpRoomElectric, 
+			a.statusRoomElectric, 
+			a.status, 
+			a.typeOpCardOperation, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opWorkOrderCard AS a
+		<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.getFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpWorkOrder != null">
+				AND a.idOpWorkOrder = #{idOpWorkOrder}
+			</if>
+			<if test="midOpWorkOrder != null">
+				AND a.midOpWorkOrder = #{midOpWorkOrder}
+			</if>
+			<if test="idOpDevice != null">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="statusOpDevice != null">
+				AND a.statusOpDevice = #{statusOpDevice}
+			</if>
+			<if test="idOpCardOperation != null">
+				AND a.idOpCardOperation = #{idOpCardOperation}
+			</if>
+			<if test="statusOpCardOperation != null">
+				AND a.statusOpCardOperation = #{statusOpCardOperation}
+			</if>
+			<if test="dateSendOpCardOperation != null">
+				AND a.dateSendOpCardOperation = #{dateSendOpCardOperation}
+			</if>
+			<if test="idMaUserOpCardOperation != null">
+				AND a.idMaUserOpCardOperation = #{idMaUserOpCardOperation}
+			</if>
+			<if test="idOpCardPower != null">
+				AND a.idOpCardPower = #{idOpCardPower}
+			</if>
+			<if test="statusOpCardPower != null">
+				AND a.statusOpCardPower = #{statusOpCardPower}
+			</if>
+			<if test="dateSendOpCardPower != null">
+				AND a.dateSendOpCardPower = #{dateSendOpCardPower}
+			</if>
+			<if test="idMaUserOpCardPower != null">
+				AND a.idMaUserOpCardPower = #{idMaUserOpCardPower}
+			</if>
+			<if test="idOpCardWork != null">
+				AND a.idOpCardWork = #{idOpCardWork}
+			</if>
+			<if test="statusOpCardWork != null">
+				AND a.statusOpCardWork = #{statusOpCardWork}
+			</if>
+			<if test="dateSendOpCardWork != null">
+				AND a.dateSendOpCardWork = #{dateSendOpCardWork}
+			</if>
+			<if test="idMaUserOpCardWork != null">
+				AND a.idMaUserOpCardWork = #{idMaUserOpCardWork}
+			</if>
+			<if test="idLeader != null">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="statusLeader != null">
+				AND a.statusLeader = #{statusLeader}
+			</if>
+			<if test="idOpRoomOperation != null">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpDeviceGroupPowerOff != null">
+				AND a.idOpDeviceGroupPowerOff = #{idOpDeviceGroupPowerOff}
+			</if>
+			<if test="idOpDeviceGroupPowerOn != null">
+				AND a.idOpDeviceGroupPowerOn = #{idOpDeviceGroupPowerOn}
+			</if>
+			<if test="statusOpRoomOperation != null">
+				AND a.statusOpRoomOperation = #{statusOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="statusRoomElectric != null">
+				AND a.statusRoomElectric = #{statusRoomElectric}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="typeOpCardOperation != null">
+				AND a.typeOpCardOperation = #{typeOpCardOperation}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.getWhere"/>
+		</where>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		LIMIT 1
+	</select>
+
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idOpWorkOrder, 
+			a.midOpWorkOrder, 
+			a.idOpDevice, 
+			a.statusOpDevice, 
+			a.idOpCardOperation, 
+			a.statusOpCardOperation, 
+			a.dateSendOpCardOperation, 
+			a.idMaUserOpCardOperation, 
+			a.idOpCardPower, 
+			a.statusOpCardPower, 
+			a.dateSendOpCardPower, 
+			a.idMaUserOpCardPower, 
+			a.idOpCardWork, 
+			a.statusOpCardWork, 
+			a.dateSendOpCardWork, 
+			a.idMaUserOpCardWork, 
+			a.idLeader, 
+			a.statusLeader, 
+			a.idOpRoomOperation, 
+			a.idOpDeviceGroupPowerOff, 
+			a.idOpDeviceGroupPowerOn, 
+			a.statusOpRoomOperation, 
+			a.idOpRoomElectric, 
+			a.statusRoomElectric, 
+			a.status, 
+			a.typeOpCardOperation, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opWorkOrderCard AS a
+		<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.searchFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpWorkOrder != null and idOpWorkOrder != ''">
+				AND a.idOpWorkOrder = #{idOpWorkOrder}
+			</if>
+			<if test="midOpWorkOrder != null and midOpWorkOrder != ''">
+				AND a.midOpWorkOrder = #{midOpWorkOrder}
+			</if>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="statusOpDevice != null and statusOpDevice != ''">
+				AND a.statusOpDevice = #{statusOpDevice}
+			</if>
+			<if test="idOpCardOperation != null and idOpCardOperation != ''">
+				AND a.idOpCardOperation = #{idOpCardOperation}
+			</if>
+			<if test="statusOpCardOperation != null and statusOpCardOperation != ''">
+				AND a.statusOpCardOperation = #{statusOpCardOperation}
+			</if>
+			<if test="dateSendOpCardOperation != null and dateSendOpCardOperation != ''">
+				AND a.dateSendOpCardOperation = #{dateSendOpCardOperation}
+			</if>
+			<if test="idMaUserOpCardOperation != null and idMaUserOpCardOperation != ''">
+				AND a.idMaUserOpCardOperation = #{idMaUserOpCardOperation}
+			</if>
+			<if test="idOpCardPower != null and idOpCardPower != ''">
+				AND a.idOpCardPower = #{idOpCardPower}
+			</if>
+			<if test="statusOpCardPower != null and statusOpCardPower != ''">
+				AND a.statusOpCardPower = #{statusOpCardPower}
+			</if>
+			<if test="dateSendOpCardPower != null and dateSendOpCardPower != ''">
+				AND a.dateSendOpCardPower = #{dateSendOpCardPower}
+			</if>
+			<if test="idMaUserOpCardPower != null and idMaUserOpCardPower != ''">
+				AND a.idMaUserOpCardPower = #{idMaUserOpCardPower}
+			</if>
+			<if test="idOpCardWork != null and idOpCardWork != ''">
+				AND a.idOpCardWork = #{idOpCardWork}
+			</if>
+			<if test="statusOpCardWork != null and statusOpCardWork != ''">
+				AND a.statusOpCardWork = #{statusOpCardWork}
+			</if>
+			<if test="dateSendOpCardWork != null and dateSendOpCardWork != ''">
+				AND a.dateSendOpCardWork = #{dateSendOpCardWork}
+			</if>
+			<if test="idMaUserOpCardWork != null and idMaUserOpCardWork != ''">
+				AND a.idMaUserOpCardWork = #{idMaUserOpCardWork}
+			</if>
+			<if test="idLeader != null and idLeader != ''">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="statusLeader != null and statusLeader != ''">
+				AND a.statusLeader = #{statusLeader}
+			</if>
+			<if test="idOpRoomOperation != null and idOpRoomOperation != ''">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpDeviceGroupPowerOff != null and idOpDeviceGroupPowerOff != ''">
+				AND a.idOpDeviceGroupPowerOff = #{idOpDeviceGroupPowerOff}
+			</if>
+			<if test="idOpDeviceGroupPowerOn != null and idOpDeviceGroupPowerOn != ''">
+				AND a.idOpDeviceGroupPowerOn = #{idOpDeviceGroupPowerOn}
+			</if>
+			<if test="statusOpRoomOperation != null and statusOpRoomOperation != ''">
+				AND a.statusOpRoomOperation = #{statusOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null and idOpRoomElectric != ''">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="statusRoomElectric != null and statusRoomElectric != ''">
+				AND a.statusRoomElectric = #{statusRoomElectric}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="typeOpCardOperation != null and typeOpCardOperation != ''">
+				AND a.typeOpCardOperation = #{typeOpCardOperation}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.searchWhere"/>
+		</where>
+		<if test="group != null">
+			GROUP BY ${group}
+		</if>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		<if test="rows != 0">
+			LIMIT ${startIndex}, ${rows}
+		</if>
+	</select>
+
+	<!-- 查询实体对象记录数 -->
+	<select id="count" parameterType="java.lang.Object" resultType="int">
+		SELECT COUNT(1) FROM opWorkOrderCard AS a
+		<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.searchFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpWorkOrder != null and idOpWorkOrder != ''">
+				AND a.idOpWorkOrder = #{idOpWorkOrder}
+			</if>
+			<if test="midOpWorkOrder != null and midOpWorkOrder != ''">
+				AND a.midOpWorkOrder = #{midOpWorkOrder}
+			</if>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="statusOpDevice != null and statusOpDevice != ''">
+				AND a.statusOpDevice = #{statusOpDevice}
+			</if>
+			<if test="idOpCardOperation != null and idOpCardOperation != ''">
+				AND a.idOpCardOperation = #{idOpCardOperation}
+			</if>
+			<if test="statusOpCardOperation != null and statusOpCardOperation != ''">
+				AND a.statusOpCardOperation = #{statusOpCardOperation}
+			</if>
+			<if test="dateSendOpCardOperation != null and dateSendOpCardOperation != ''">
+				AND a.dateSendOpCardOperation = #{dateSendOpCardOperation}
+			</if>
+			<if test="idMaUserOpCardOperation != null and idMaUserOpCardOperation != ''">
+				AND a.idMaUserOpCardOperation = #{idMaUserOpCardOperation}
+			</if>
+			<if test="idOpCardPower != null and idOpCardPower != ''">
+				AND a.idOpCardPower = #{idOpCardPower}
+			</if>
+			<if test="statusOpCardPower != null and statusOpCardPower != ''">
+				AND a.statusOpCardPower = #{statusOpCardPower}
+			</if>
+			<if test="dateSendOpCardPower != null and dateSendOpCardPower != ''">
+				AND a.dateSendOpCardPower = #{dateSendOpCardPower}
+			</if>
+			<if test="idMaUserOpCardPower != null and idMaUserOpCardPower != ''">
+				AND a.idMaUserOpCardPower = #{idMaUserOpCardPower}
+			</if>
+			<if test="idOpCardWork != null and idOpCardWork != ''">
+				AND a.idOpCardWork = #{idOpCardWork}
+			</if>
+			<if test="statusOpCardWork != null and statusOpCardWork != ''">
+				AND a.statusOpCardWork = #{statusOpCardWork}
+			</if>
+			<if test="dateSendOpCardWork != null and dateSendOpCardWork != ''">
+				AND a.dateSendOpCardWork = #{dateSendOpCardWork}
+			</if>
+			<if test="idMaUserOpCardWork != null and idMaUserOpCardWork != ''">
+				AND a.idMaUserOpCardWork = #{idMaUserOpCardWork}
+			</if>
+			<if test="idLeader != null and idLeader != ''">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="statusLeader != null and statusLeader != ''">
+				AND a.statusLeader = #{statusLeader}
+			</if>
+			<if test="idOpRoomOperation != null and idOpRoomOperation != ''">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpDeviceGroupPowerOff != null and idOpDeviceGroupPowerOff != ''">
+				AND a.idOpDeviceGroupPowerOff = #{idOpDeviceGroupPowerOff}
+			</if>
+			<if test="idOpDeviceGroupPowerOn != null and idOpDeviceGroupPowerOn != ''">
+				AND a.idOpDeviceGroupPowerOn = #{idOpDeviceGroupPowerOn}
+			</if>
+			<if test="statusOpRoomOperation != null and statusOpRoomOperation != ''">
+				AND a.statusOpRoomOperation = #{statusOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null and idOpRoomElectric != ''">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="statusRoomElectric != null and statusRoomElectric != ''">
+				AND a.statusRoomElectric = #{statusRoomElectric}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="typeOpCardOperation != null and typeOpCardOperation != ''">
+				AND a.typeOpCardOperation = #{typeOpCardOperation}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.searchWhere"/>
+		</where>
+	</select>
+
+	<!-- 查询实体分页对象集合 -->
+	<select id="selectPage" parameterType="java.lang.Object" resultMap="opWorkOrderCard">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idOpWorkOrder, 
+			a.midOpWorkOrder, 
+			a.idOpDevice, 
+			a.statusOpDevice, 
+			a.idOpCardOperation, 
+			a.statusOpCardOperation, 
+			a.dateSendOpCardOperation, 
+			a.idMaUserOpCardOperation, 
+			a.idOpCardPower, 
+			a.statusOpCardPower, 
+			a.dateSendOpCardPower, 
+			a.idMaUserOpCardPower, 
+			a.idOpCardWork, 
+			a.statusOpCardWork, 
+			a.dateSendOpCardWork, 
+			a.idMaUserOpCardWork, 
+			a.idLeader, 
+			a.statusLeader, 
+			a.idOpRoomOperation, 
+			a.idOpDeviceGroupPowerOff, 
+			a.idOpDeviceGroupPowerOn, 
+			a.statusOpRoomOperation, 
+			a.idOpRoomElectric, 
+			a.statusRoomElectric, 
+			a.status, 
+			a.typeOpCardOperation, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opWorkOrderCard AS a
+		<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.searchFrom"/>
+		<where>
+			a.tag != 'd' AND ${sqlWhere}
+		</where>
+		ORDER BY ${orderBy}
+	</select>
+
+	<!-- 查询树形结构 -->
+	<select id="selectTree" parameterType="java.lang.Object" resultMap="opWorkOrderCard" resultType="java.util.HashMap">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.selectTreeColumn"/>
+			a.id AS value,
+			a.name AS title
+		FROM opWorkOrderCard AS a
+		<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.selectTreeFrom"/>
+		<where>
+				a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idOpWorkOrder != null">
+				AND a.idOpWorkOrder = #{idOpWorkOrder}
+			</if>
+			<if test="midOpWorkOrder != null">
+				AND a.midOpWorkOrder = #{midOpWorkOrder}
+			</if>
+			<if test="idOpDevice != null">
+				AND a.idOpDevice = #{idOpDevice}
+			</if>
+			<if test="statusOpDevice != null">
+				AND a.statusOpDevice = #{statusOpDevice}
+			</if>
+			<if test="idOpCardOperation != null">
+				AND a.idOpCardOperation = #{idOpCardOperation}
+			</if>
+			<if test="statusOpCardOperation != null">
+				AND a.statusOpCardOperation = #{statusOpCardOperation}
+			</if>
+			<if test="dateSendOpCardOperation != null">
+				AND a.dateSendOpCardOperation = #{dateSendOpCardOperation}
+			</if>
+			<if test="idMaUserOpCardOperation != null">
+				AND a.idMaUserOpCardOperation = #{idMaUserOpCardOperation}
+			</if>
+			<if test="idOpCardPower != null">
+				AND a.idOpCardPower = #{idOpCardPower}
+			</if>
+			<if test="statusOpCardPower != null">
+				AND a.statusOpCardPower = #{statusOpCardPower}
+			</if>
+			<if test="dateSendOpCardPower != null">
+				AND a.dateSendOpCardPower = #{dateSendOpCardPower}
+			</if>
+			<if test="idMaUserOpCardPower != null">
+				AND a.idMaUserOpCardPower = #{idMaUserOpCardPower}
+			</if>
+			<if test="idOpCardWork != null">
+				AND a.idOpCardWork = #{idOpCardWork}
+			</if>
+			<if test="statusOpCardWork != null">
+				AND a.statusOpCardWork = #{statusOpCardWork}
+			</if>
+			<if test="dateSendOpCardWork != null">
+				AND a.dateSendOpCardWork = #{dateSendOpCardWork}
+			</if>
+			<if test="idMaUserOpCardWork != null">
+				AND a.idMaUserOpCardWork = #{idMaUserOpCardWork}
+			</if>
+			<if test="idLeader != null">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="statusLeader != null">
+				AND a.statusLeader = #{statusLeader}
+			</if>
+			<if test="idOpRoomOperation != null">
+				AND a.idOpRoomOperation = #{idOpRoomOperation}
+			</if>
+			<if test="idOpDeviceGroupPowerOff != null">
+				AND a.idOpDeviceGroupPowerOff = #{idOpDeviceGroupPowerOff}
+			</if>
+			<if test="idOpDeviceGroupPowerOn != null">
+				AND a.idOpDeviceGroupPowerOn = #{idOpDeviceGroupPowerOn}
+			</if>
+			<if test="statusOpRoomOperation != null">
+				AND a.statusOpRoomOperation = #{statusOpRoomOperation}
+			</if>
+			<if test="idOpRoomElectric != null">
+				AND a.idOpRoomElectric = #{idOpRoomElectric}
+			</if>
+			<if test="statusRoomElectric != null">
+				AND a.statusRoomElectric = #{statusRoomElectric}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="typeOpCardOperation != null">
+				AND a.typeOpCardOperation = #{typeOpCardOperation}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderCardConditionMapper.selectTreeWhere"/>
+		</where>
+	</select>
+
+</mapper>
