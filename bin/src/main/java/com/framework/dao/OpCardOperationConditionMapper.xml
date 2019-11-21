@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpCardOperationConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.OpCardOperationImpl" id="opCardOperation"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		IFNULL(b.name, '') nameOpDevice, 
+		IFNULL(c.name, '') nameOpRoomOperation, 
+		IFNULL(d.name, '') nameOpRoomElectric, 
+		
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN opDevice AS b ON b.id = a.idOpDevice
+		LEFT JOIN opRoomOperation AS c ON c.id = a.idOpRoomOperation
+		LEFT JOIN opRoomElectric AS d ON d.id = a.idOpRoomElectric
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	<!-- 	<if test="nameOpDevice != null and nameOpDevice != ''">
+			AND b.nameOpDevice LIKE CONCAT('%', #{nameOpDevice},'%')
+		</if>
+		<if test="nameOpRoomOperation != null and nameOpRoomOperation != ''">
+			AND c.nameOpRoomOperation LIKE CONCAT('%', #{nameOpRoomOperation},'%')
+		</if>
+		<if test="nameOpRoomElectric != null and nameOpRoomElectric != ''">
+			AND d.nameOpRoomElectric LIKE CONCAT('%', #{nameOpRoomElectric},'%')
+		</if> -->
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+
+</mapper>

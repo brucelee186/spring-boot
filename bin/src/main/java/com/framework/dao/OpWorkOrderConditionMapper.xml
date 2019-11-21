@@ -1,0 +1,736 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpWorkOrderConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.OpWorkOrderImpl" id="opWorkOrder"/> 
+	<resultMap id="maUserImpl" type="com.framework.bean.impl.MaUserImpl" >
+		<id property="id" column="idMaUser" /> 
+		<result property="name" column="nameMaUser" /> 
+		<result property="nameMaOrgnization" column="nameMaOrgnization" /> 
+	</resultMap>
+	<resultMap id="maUserElectrician" type="com.framework.bean.impl.MaUserImpl" >
+		<id property="id" column="idMaUserElectrician" /> 
+		<result property="name" column="nameMaUserElectrician" /> 
+	</resultMap>	
+	<resultMap id="opWorkOrderImpl" type="com.framework.bean.impl.OpWorkOrderImpl">
+		<id property="id" column="id" />
+		<result property="idMaCompany" column="idMaCompany" /> 
+		<result property="name" column="name" /> 
+		<result property="idOpProUnit" column="idOpProUnit" /> 
+		<result property="nameOpProUnit" column="nameOpProUnit" /> 
+		<result property="idManager" column="idManager" /> 
+		<result property="nameManager" column="nameManager" /> 
+		<result property="idLeader" column="idLeader" /> 
+		<result property="nameLeader" column="nameLeader" /> 
+		<result property="idChecker" column="idChecker" /> 
+		<result property="nameChecker" column="nameChecker" /> 
+		<result property="dateExpect" column="dateExpect" /> 
+		<result property="hoursExpect" column="hoursExpect" /> 
+		<result property="hoursActual" column="hoursActual" /> 
+		<result property="countOpCardApply" column="countOpCardApply" /> 
+		<result property="countOpCardSend" column="countOpCardSend" /> 
+		<result property="countOpDevicePower" column="countOpDevicePower" /> 
+		<result property="description" column="description" /> 
+		<result property="remark" column="remark" /> 
+		<result property="createDate" column="createDate" /> 
+		<result property="dateTaken" column="dateTaken" /> 
+		<result property="dateReturned" column="dateReturned" /> 
+		<result property="status" column="status" /> 
+		<result property="groupDeviceName" column="groupDeviceName" /> 
+		<collection property="listMaUser" resultMap="maUserImpl"></collection>
+		<collection property="listMaUserElectrician" resultMap="maUserElectrician"></collection>
+	</resultMap>	
+
+	<sql id="getColumn">
+		IFNULL(c1.name, '') AS nameChecker,
+		IFNULL(c2.name, '') AS nameLeader,
+		IFNULL(d.name, '') AS nameStatus,
+	</sql>
+
+	<sql id="getFrom">
+		LEFT JOIN maUser AS c1 ON c1.id = a.idChecker
+		LEFT JOIN maUser AS c2 ON c2.id = a.idLeader
+		LEFT JOIN syStatusDetail AS d ON (d.codeSyStatus = "gdzt" AND d.value = a.status)
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		<!-- IFNULL(b.name, '') AS nameOpProUnit,
+		IFNULL(c1.name, '') AS nameChecker,
+		IFNULL(c2.name, '') AS nameLeader, -->
+		IFNULL(d.name, '') AS nameStatus,
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN syStatusDetail AS d ON (d.codeSyStatus = "gdzt" AND d.value = a.status)
+		<!-- LEFT JOIN opWorkOrderEmployee AS e ON e.idOpWorkOrder = a.id  -->
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND a.id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+	
+	<!-- 查询实体分页对象集合 -->
+	<select id="getOpreatePage" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a. NAME,
+			a.idOpProUnit,
+			a.nameOpProUnit,
+			a.idManager,
+			a.nameManager,
+			a.idLeader,
+			a.nameLeader,
+			a.idChecker,
+			a.nameChecker,
+			a.dateExpect,
+			a.hoursExpect,
+			a.hoursActual,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.countOpDevicePower,
+			a.description,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.datesStartup,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			a. STATUS,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp,
+			IFNULL(c1.name, '') AS nameChecker,
+			IFNULL(c2.name, '') AS nameLeader,
+			IFNULL(d.name, '') AS nameStatus
+		FROM
+			opWorkOrder AS a
+		LEFT JOIN maUser AS c1 ON c1.id = a.idChecker
+		LEFT JOIN maUser AS c2 ON c2.id = a.idLeader
+		LEFT JOIN opWorkOrderEmployee AS c ON c.idOpWorkOrder = a.id
+		LEFT JOIN syStatusDetail AS d ON (d.codeSyStatus = "gdzt" AND d.value = a.status)
+		<where>
+		AND	a.idMaCompany = #{idMaCompany}
+		AND a.status != 're'
+		AND a.tag != 'd'
+		AND a.statusComplete != 'co'
+		<if test="idLeader != null and idLeader != ''">
+			AND a.idLeader = #{idLeader}
+		</if>
+		<if test="idChecker != null and idChecker != ''">
+			AND a.idChecker = #{idChecker}
+		</if>
+		<if test="idManager != null and idManager != ''">
+			AND a.idManager = #{idManager}
+		</if>
+		<if test="idMaUser != null and idMaUser != ''">
+			AND c.idMaUser = #{idMaUser}
+		</if>
+		</where>
+		ORDER BY a.id DESC
+	</select>
+	<!-- 发牌序列 -->
+	<select id="getIdOpDeviceToOpWorkOrder" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a.name,
+			a.idOpProUnit,
+			a.idChecker,
+			a.idLeader,
+			a.idManager,
+			a.dateExpect,
+			a.hoursActual,
+			a.hoursExpect,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			a.status,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp,
+			a.description,
+			a.nameOpProUnit,
+			a.nameManager,
+			a.nameLeader,
+			a.nameChecker,
+			a.countOpDevicePower
+		FROM
+			opWorkOrder AS a
+		LEFT JOIN opWorkOrderCard AS b ON b.idOpWorkOrder = a.id
+		LEFT JOIN opDevice AS c ON c.id = b.idOpDevice
+		<where>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				<if test="desc != null and desc != ''">
+					AND c.id = #{idOpDevice}
+				</if>
+				<if test="desc == null or desc == ''">
+					<!-- 
+					AND c.statusOpRoomOperation = 'ws' 
+					-->
+					AND b.statusOpCardOperation = 'at'
+					AND a.status = 'ai'
+					AND c.id = #{idOpDevice}
+					AND b.midOpWorkOrder = 0
+				</if>  
+			</if> 
+			<if test="idOpDevice == null or idOpDevice == ''">
+				<!--
+				AND c.statusOpRoomOperation = 'ws' 
+				-->
+				AND b.statusOpCardOperation = 'at'
+				AND a.status = 'ai'
+				AND b.midOpWorkOrder = 0
+			</if> 
+			AND c.idOpRoomOperation = #{idOpRoomOperation}
+			AND a.tag != 'd'
+			GROUP BY a.id
+		</where>
+	</select>
+	<!-- 
+	<select id="getIdOpDeviceToOpWorkOrder" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a.name,
+			a.idOpProUnit,
+			a.idChecker,
+			a.idLeader,
+			a.idManager,
+			a.dateExpect,
+			a.hoursActual,
+			a.hoursExpect,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			a.status,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp,
+			a.description,
+			a.nameOpProUnit,
+			a.nameManager,
+			a.nameLeader,
+			a.nameChecker,
+			a.countOpDevicePower
+		FROM
+			opWorkOrder AS a
+		LEFT JOIN opWorkOrderCard AS b ON b.idOpWorkOrder = a.id
+		LEFT JOIN opDevice AS c ON c.id = b.idOpDevice
+		<where>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				<if test="desc != null and desc != ''">
+					AND c.id = #{idOpDevice}
+				</if>
+				<if test="desc == null or desc == ''">
+					AND c.statusOpRoomOperation = 'ws' 
+					AND a.status = 'ai'
+					AND c.id = #{idOpDevice}
+				</if>  
+			</if> 
+			<if test="idOpDevice == null or idOpDevice == ''">
+				AND c.statusOpRoomOperation = 'ws' 
+				AND a.status = 'ai'
+			</if> 
+			AND b.midOpWorkOrder = 0
+			AND c.idOpRoomOperation = #{idOpRoomOperation}
+			AND a.tag != 'd'
+			GROUP BY a.id
+		</where>
+	</select>
+	 -->
+	<!-- 停电序列 -->
+	<select id="getOrdersPowersOffice" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a. NAME,
+			a.idOpProUnit,
+			a.idChecker,
+			a.idLeader,
+			a.idManager,
+			a.dateExpect,
+			a.hoursActual,
+			a.hoursExpect,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			a. STATUS,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp,
+			a.description,
+			a.nameOpProUnit,
+			a.nameManager,
+			a.nameLeader,
+			a.nameChecker,
+			a.countOpDevicePower
+		FROM
+			opDevice AS c			
+		LEFT JOIN opWorkOrder AS a ON c.midOpWorkOrder = a.id 
+		<where>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND c.id = #{idOpDevice} 
+				<if test="desc != null and desc != ''">
+					<!-- AND c.statusOpRoomElectric IN ('ws','wr') -->
+				</if> 
+			</if> 
+			<if test="desc == null or desc == ''">
+				AND c.statusOpRoomElectric = 'ws' 
+			</if> 
+			AND c.idOpRoomElectric = #{idOpRoomElectric}
+			AND c.tag != 'd'
+			GROUP BY c.midOpWorkOrder
+			ORDER BY a.id DESC
+		</where>
+	</select>
+
+	
+	<select id="getOrdersIdCheckerInfo" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT
+			b.idChecker,
+			b.nameChecker,
+			a.midOpWorkOrder
+		FROM
+			opDevice AS a
+		LEFT JOIN opWorkOrder AS b ON a.midOpWorkOrder = b.id
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if> 
+			AND a.tag = "n"
+			AND a.tag != 'd' 
+		</where>
+	</select>
+	
+	<!-- 查询送电序列 -->
+	<select id="getOrdersPowersSend" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a.name,
+			a.idOpProUnit,
+			a.idChecker,
+			a.idLeader,
+			a.idManager,
+			a.dateExpect,
+			a.hoursActual,
+			a.hoursExpect,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			a.`status`,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp,
+			a.description,
+			a.nameOpProUnit,
+			a.nameManager,
+			a.nameLeader,
+			a.nameChecker,
+			a.countOpDevicePower
+		FROM
+			opDevice AS c
+		LEFT JOIN opWorkOrder AS a ON a.id = c.midOpWorkOrder
+		<where>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND c.id = #{idOpDevice} 
+			</if> 
+			<if test="desc == null or desc == ''">
+				AND c.statusOpRoomElectric = 'wr' 
+			</if> 
+			AND c.idOpRoomElectric = #{idOpRoomElectric}
+			AND c.tag != 'd'
+		
+			GROUP BY c.midOpWorkOrder
+			ORDER BY a.id DESC
+		</where>
+	</select>
+	
+	<!-- 查询还牌序列 -->
+	<select id="getReturnCardOrders" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a. NAME,
+			a.idOpProUnit,
+			a.idChecker,
+			a.idLeader,
+			a.idManager,
+			a.dateExpect,
+			a.hoursActual,
+			a.hoursExpect,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			a. STATUS,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp,
+			a.description,
+			a.nameOpProUnit,
+			a.nameManager,
+			a.nameLeader,
+			a.nameChecker,
+			a.countOpDevicePower
+		FROM
+			opWorkOrder AS a
+		LEFT JOIN opWorkOrderCard AS b ON b.idOpWorkOrder = a.id
+		LEFT JOIN opDevice AS c ON b.idOpDevice = c.id
+		<where>
+			<if test="idOpDevice != null and idOpDevice != ''">
+				AND c.id = #{idOpDevice} 
+			</if> 
+			AND c.idOpRoomOperation = #{idOpRoomOperation}
+			AND a.status = 'pi'
+			AND a.tag = "n"
+			AND a.tag != 'd' 
+			GROUP BY a.id
+		</where>
+	</select>
+
+	
+	<!-- 查询所有停电工完成工单 -->
+	<select id="selectPoWorkOrder" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT 
+			a.id,
+			a.name,
+			a.idMaCompany,
+			a.idLeader,
+			a.idChecker,
+			a.modifiedUser,
+			a.countOpCardApply,
+			SUM(CASE WHEN c.status = 'of' THEN 1 WHEN c.status = 'on' THEN 0 ELSE 0 END) countOpDevicePower
+		FROM 
+			opWorkOrder a
+		LEFT JOIN opWorkOrderCard b ON b.idOpWorkOrder = a.id
+		LEFT JOIN opDevice c ON c.id = b.idOpDevice
+		WHERE
+			a.`status` = 'ad' AND a.tag != 'd' 
+		AND 
+			a.countOpCardApply > 0
+		GROUP BY 
+			a.id
+		HAVING 
+			a.countOpCardApply - countOpDevicePower = 0;
+	</select>	
+	
+	<!-- 批量更新停电完成工单 -->
+	<update id="updateWorkOrderPo" parameterType="java.lang.Object">
+		UPDATE opWorkOrder
+		SET
+			status = #{status},
+			modifiedUser = #{modifiedUser},
+			modifiedDate = #{modifiedDate},
+			countOpDevicePower = opWorkOrder.countOpCardApply,
+			modifiedIp = #{modifiedIp}
+		WHERE id IN
+		<foreach collection="arrListId" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<!-- 查询所有参与送断电的工单 -->
+	<select id="searchWorkOrderCabinet" parameterType="java.lang.Object" resultMap="opWorkOrderImpl">
+		SELECT
+			ow.id,
+			ow.idMaCompany,
+			ow.name,
+			ow.idOpProUnit,
+			ow.nameOpProUnit,
+			ow.idManager,
+			ow.nameManager,
+			ow.idLeader,
+			ow.nameLeader,
+			ow.idChecker,
+			ow.nameChecker,
+			ow.dateExpect,
+			ow.hoursExpect,
+			ow.hoursActual,
+			ow.countOpCardApply,
+			ow.countOpCardSend,
+			ow.countOpDevicePower,
+			ow.description,
+			ow.status,
+			ow.createDate,
+			ow.dateTaken,
+			ow.dateReturned,
+			GROUP_CONCAT(DISTINCT od.`name` ORDER BY od.`name`) groupDeviceName,
+			mu.id idMaUser,
+			mu.name nameMaUser,
+			mu.nameMaOrgnization,
+			mu2.id idMaUserElectrician,
+			mu2.`name` nameMaUserElectrician
+		FROM
+			opWorkOrder ow
+		LEFT JOIN opWorkOrderEmployee oe ON oe.idOpWorkOrder = ow.id
+		LEFT JOIN opDeviceElectricianCard oec ON oec.midOpWorkOrder = ow.id
+		LEFT JOIN maUser mu ON mu.id = oe.idMaUser
+		LEFT JOIN maUser mu2 ON mu2.id = oec.idElectrician
+		LEFT JOIN opDevice od ON od.midOpWorkOrder = ow.id
+		LEFT JOIN opDeviceCabinet oc ON oc.id = od.idOpDeviceCabinet
+		WHERE
+			oc.id = #{idOpDeviceCabinet}
+		AND
+			oec.statusElectrician != 'or'			
+		GROUP BY 
+			ow.id, mu.id, mu2.id
+	</select>	
+	
+	<!-- 查询电工历史工单 -->
+	<select id="selectHistoryOpWorkOrder" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			c.id,
+			c.name,
+			c.nameLeader,
+			c.nameChecker,
+			c.hoursExpect,
+			c.dateExpect,
+			c.createDate
+		FROM
+			opDeviceElectricianCard AS a
+		LEFT JOIN opWorkOrderCard AS b ON b.idOpDevice = a.idOpDevice
+		LEFT JOIN opWorkOrder AS c ON c.id = b.idOpWorkOrder
+		WHERE
+			a.idElectrician = #{idElectrician}
+		AND a.idMaCompany = #{idMaCompany}
+		AND a.tag != 'd'
+		AND c.statusComplete = 'co'
+		AND b.typeOpCardOperation = 'm'
+		AND c.createDate > DATE_SUB(CURDATE(),INTERVAL 3 MONTH)
+		ORDER BY c.createDate DESC
+	</select>
+	
+	<!-- 查询历史工单 -->
+	<select id="getHistoryOpWorkOrder" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT DISTINCT
+			a.id,
+			a. NAME,
+			a.nameLeader,
+			a.nameChecker,
+			a.dateExpect,
+			a.hoursActual,
+			a.createDate,
+			a.hoursExpect
+		FROM
+			opWorkOrder AS a LEFT JOIN opWorkOrderEmployee AS b ON b.idOpWorkOrder = a.id
+		WHERE
+			a.idMaCompany = #{idMaCompany}
+		AND a.tag != 'd' 
+		<!-- 2019-10-23修改历史工单包含拒绝
+		AND a.statusComplete IN ('co','re')
+		-->
+		AND (a.statusComplete = 'co' or a.`status` = 're')
+		<if test="idLeader != null and idLeader != ''">
+			AND a.idLeader = #{idLeader}
+		</if>
+		<if test="idChecker != null and idChecker != ''">
+			AND a.idChecker = #{idChecker}
+		</if>
+		<if test="idManager != null and idManager != ''">
+			AND a.idManager = #{idManager}
+		</if>
+		<if test="idMaUser != null and idMaUser != ''">
+			AND b.idMaUser = #{idMaUser}
+		</if>
+		AND a.createDate > DATE_SUB(CURDATE(),INTERVAL 3 MONTH)
+		ORDER BY a.id DESC
+	</select>
+	
+	<!-- 查询工单详细 -->
+	<select id="getOpreaterDetailInfo" parameterType="java.lang.Object" resultMap="opWorkOrder">
+			SELECT
+			IFNULL(c1. NAME, '') AS nameChecker,
+			IFNULL(c2. NAME, '') AS nameLeader,
+			IFNULL(d. NAME, '') AS nameStatus,
+			a.id,
+			a.uid,
+			a.idMaCompany,
+			a. NAME,
+			a.idOpProUnit,
+			a.nameOpProUnit,
+			a.idManager,
+			a.nameManager,
+			a.idLeader,
+			a.nameLeader,
+			a.idChecker,
+			a.nameChecker,
+			a.dateExpect,
+			a.hoursExpect,
+			a.hoursActual,
+			a.countOpCardApply,
+			a.countOpCardSend,
+			a.countOpDevicePower,
+			a.description,
+			a.remark,
+			a.dateCreated,
+			a.dateGrouped,
+			a.dateTaken,
+			a.datesStartup,
+			a.dateOptioned,
+			a.dateReturned,
+			a.dateInputted,
+			(CASE WHEN a.statusComplete = 'un' THEN a.status ELSE a.statusComplete END) AS status,
+			a.statusComplete,
+			a.tag,
+			a.createUser,
+			a.createDate,
+			a.createIp,
+			a.modifiedUser,
+			a.modifiedDate,
+			a.modifiedIp
+		FROM
+			opWorkOrder AS a
+		LEFT JOIN maUser AS c1 ON c1.id = a.idChecker
+		LEFT JOIN maUser AS c2 ON c2.id = a.idLeader
+		LEFT JOIN syStatusDetail AS d ON (
+			d.codeSyStatus = "gdzt"
+			AND d.
+			VALUE
+				= a. STATUS
+		)
+		<where>
+			 a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询该工单是否被其他操作室还牌 -->
+	<select id="getTheOpWorkOrderToOtherReturn" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT * FROM opWorkOrder AS a WHERE a.tag != 'd' AND a.id = #{id} AND a.`status` = 'pi'
+	</select>
+	
+	<!-- 根据主工单编号查询所有关联的工单 -->
+	<select id="selectOpWorkOrderByMid" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT 
+			DISTINCT ow.*
+		FROM 
+			opWorkOrder ow
+		LEFT JOIN opWorkOrderCard oc ON oc.idOpWorkOrder = ow.id
+		WHERE 
+			oc.midOpWorkOrder = #{id}
+	</select>
+	
+	<!-- 更新驳回关联的工单 -->
+	<update id="updateRejectOpWorkOrderByMid" parameterType="java.lang.Object">
+		UPDATE 
+			opWorkOrder o
+		SET 
+			o.`status` = #{status},
+			o.statusComplete = #{statusComplete},
+			o.modifiedDate = #{modifiedDate},
+			o.modifiedUser = #{modifiedUser},
+			o.modifiedIp = #{modifiedIp}
+		WHERE
+			o.id IN 
+			<foreach collection="listOpWorkOrder" item="item" index="index" open="(" separator="," close=")">
+				#{item.id}
+			</foreach>
+	</update>	
+</mapper>

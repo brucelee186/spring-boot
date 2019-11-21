@@ -1,0 +1,1083 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpWorkOrderMapper" > 
+	<resultMap type="com.framework.bean.impl.OpWorkOrderImpl" id="opWorkOrder"/> 
+	<!-- 添加实体对象 -->
+	<insert id="insert" parameterType="java.lang.Object">
+		INSERT INTO opWorkOrder
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="uid != null">
+					uid,
+				</if>
+				<if test="idMaCompany != null">
+					idMaCompany,
+				</if>
+				<if test="name != null">
+					name,
+				</if>
+				<if test="idOpProUnit != null">
+					idOpProUnit,
+				</if>
+				<if test="nameOpProUnit != null">
+					nameOpProUnit,
+				</if>
+				<if test="idManager != null">
+					idManager,
+				</if>
+				<if test="nameManager != null">
+					nameManager,
+				</if>
+				<if test="idLeader != null">
+					idLeader,
+				</if>
+				<if test="nameLeader != null">
+					nameLeader,
+				</if>
+				<if test="idChecker != null">
+					idChecker,
+				</if>
+				<if test="nameChecker != null">
+					nameChecker,
+				</if>
+				<if test="dateExpect != null">
+					dateExpect,
+				</if>
+				<if test="hoursExpect != null">
+					hoursExpect,
+				</if>
+				<if test="hoursActual != null">
+					hoursActual,
+				</if>
+				<if test="countOpCardApply != null">
+					countOpCardApply,
+				</if>
+				<if test="countOpCardSend != null">
+					countOpCardSend,
+				</if>
+				<if test="countOpDevicePower != null">
+					countOpDevicePower,
+				</if>
+				<if test="description != null">
+					description,
+				</if>
+				<if test="remark != null">
+					remark,
+				</if>
+				<if test="dateCreated != null">
+					dateCreated,
+				</if>
+				<if test="dateGrouped != null">
+					dateGrouped,
+				</if>
+				<if test="dateTaken != null">
+					dateTaken,
+				</if>
+				<if test="datesStartup != null">
+					datesStartup,
+				</if>
+				<if test="dateOptioned != null">
+					dateOptioned,
+				</if>
+				<if test="dateReturned != null">
+					dateReturned,
+				</if>
+				<if test="dateInputted != null">
+					dateInputted,
+				</if>
+				<if test="status != null">
+					status,
+				</if>
+				<if test="statusComplete != null">
+					statusComplete,
+				</if>
+				<if test="tag != null">
+					tag,
+				</if>
+				<if test="createUser != null">
+					createUser,
+				</if>
+				<if test="createDate != null">
+					createDate,
+				</if>
+				<if test="createIp != null">
+					createIp,
+				</if>
+				<if test="modifiedUser != null">
+					modifiedUser,
+				</if>
+				<if test="modifiedDate != null">
+					modifiedDate,
+				</if>
+				<if test="modifiedIp != null">
+					modifiedIp,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="uid != null">
+					#{uid},
+				</if>
+				<if test="idMaCompany != null">
+					#{idMaCompany},
+				</if>
+				<if test="name != null">
+					#{name},
+				</if>
+				<if test="idOpProUnit != null">
+					#{idOpProUnit},
+				</if>
+				<if test="nameOpProUnit != null">
+					#{nameOpProUnit},
+				</if>
+				<if test="idManager != null">
+					#{idManager},
+				</if>
+				<if test="nameManager != null">
+					#{nameManager},
+				</if>
+				<if test="idLeader != null">
+					#{idLeader},
+				</if>
+				<if test="nameLeader != null">
+					#{nameLeader},
+				</if>
+				<if test="idChecker != null">
+					#{idChecker},
+				</if>
+				<if test="nameChecker != null">
+					#{nameChecker},
+				</if>
+				<if test="dateExpect != null">
+					#{dateExpect},
+				</if>
+				<if test="hoursExpect != null">
+					#{hoursExpect},
+				</if>
+				<if test="hoursActual != null">
+					#{hoursActual},
+				</if>
+				<if test="countOpCardApply != null">
+					#{countOpCardApply},
+				</if>
+				<if test="countOpCardSend != null">
+					#{countOpCardSend},
+				</if>
+				<if test="countOpDevicePower != null">
+					#{countOpDevicePower},
+				</if>
+				<if test="description != null">
+					#{description},
+				</if>
+				<if test="remark != null">
+					#{remark},
+				</if>
+				<if test="dateCreated != null">
+					#{dateCreated},
+				</if>
+				<if test="dateGrouped != null">
+					#{dateGrouped},
+				</if>
+				<if test="dateTaken != null">
+					#{dateTaken},
+				</if>
+				<if test="datesStartup != null">
+					#{datesStartup},
+				</if>
+				<if test="dateOptioned != null">
+					#{dateOptioned},
+				</if>
+				<if test="dateReturned != null">
+					#{dateReturned},
+				</if>
+				<if test="dateInputted != null">
+					#{dateInputted},
+				</if>
+				<if test="status != null">
+					#{status},
+				</if>
+				<if test="statusComplete != null">
+					#{statusComplete},
+				</if>
+				<if test="tag != null">
+					#{tag},
+				</if>
+				<if test="createUser != null">
+					#{createUser},
+				</if>
+				<if test="createDate != null">
+					#{createDate},
+				</if>
+				<if test="createIp != null">
+					#{createIp},
+				</if>
+				<if test="modifiedUser != null">
+					#{modifiedUser},
+				</if>
+				<if test="modifiedDate != null">
+					#{modifiedDate},
+				</if>
+				<if test="modifiedIp != null">
+					#{modifiedIp},
+				</if>
+			</trim>
+			<selectKey resultType="long" keyProperty="id">
+				SELECT LAST_INSERT_ID() AS ID
+			</selectKey>
+	</insert>
+
+	<!-- 删除实体对象 -->
+	<delete id="delete" parameterType="java.lang.Object">
+		DELETE FROM opWorkOrder
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND idMaCompany = #{idMaCompany}
+			</if>
+			<if test="name != null and name != ''">
+				AND name = #{name}
+			</if>
+			<if test="idOpProUnit != null and idOpProUnit != ''">
+				AND idOpProUnit = #{idOpProUnit}
+			</if>
+			<if test="nameOpProUnit != null and nameOpProUnit != ''">
+				AND nameOpProUnit = #{nameOpProUnit}
+			</if>
+			<if test="idManager != null and idManager != ''">
+				AND idManager = #{idManager}
+			</if>
+			<if test="nameManager != null and nameManager != ''">
+				AND nameManager = #{nameManager}
+			</if>
+			<if test="idLeader != null and idLeader != ''">
+				AND idLeader = #{idLeader}
+			</if>
+			<if test="nameLeader != null and nameLeader != ''">
+				AND nameLeader = #{nameLeader}
+			</if>
+			<if test="idChecker != null and idChecker != ''">
+				AND idChecker = #{idChecker}
+			</if>
+			<if test="nameChecker != null and nameChecker != ''">
+				AND nameChecker = #{nameChecker}
+			</if>
+			<if test="dateExpect != null and dateExpect != ''">
+				AND dateExpect = #{dateExpect}
+			</if>
+			<if test="hoursExpect != null and hoursExpect != ''">
+				AND hoursExpect = #{hoursExpect}
+			</if>
+			<if test="hoursActual != null and hoursActual != ''">
+				AND hoursActual = #{hoursActual}
+			</if>
+			<if test="countOpCardApply != null and countOpCardApply != ''">
+				AND countOpCardApply = #{countOpCardApply}
+			</if>
+			<if test="countOpCardSend != null and countOpCardSend != ''">
+				AND countOpCardSend = #{countOpCardSend}
+			</if>
+			<if test="countOpDevicePower != null and countOpDevicePower != ''">
+				AND countOpDevicePower = #{countOpDevicePower}
+			</if>
+			<if test="description != null and description != ''">
+				AND description = #{description}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="dateCreated != null and dateCreated != ''">
+				AND dateCreated = #{dateCreated}
+			</if>
+			<if test="dateGrouped != null and dateGrouped != ''">
+				AND dateGrouped = #{dateGrouped}
+			</if>
+			<if test="dateTaken != null and dateTaken != ''">
+				AND dateTaken = #{dateTaken}
+			</if>
+			<if test="datesStartup != null and datesStartup != ''">
+				AND datesStartup = #{datesStartup}
+			</if>
+			<if test="dateOptioned != null and dateOptioned != ''">
+				AND dateOptioned = #{dateOptioned}
+			</if>
+			<if test="dateReturned != null and dateReturned != ''">
+				AND dateReturned = #{dateReturned}
+			</if>
+			<if test="dateInputted != null and dateInputted != ''">
+				AND dateInputted = #{dateInputted}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="statusComplete != null and statusComplete != ''">
+				AND statusComplete = #{statusComplete}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.searchWhere"/>
+		</where>
+	</delete>
+
+	<!-- 更新实体对象 -->
+	<update id="update" parameterType="java.lang.Object">
+		UPDATE opWorkOrder
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="uid != null">
+				uid = #{uid},
+			</if>
+			<if test="idMaCompany != null">
+				idMaCompany = #{idMaCompany},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="idOpProUnit != null">
+				idOpProUnit = #{idOpProUnit},
+			</if>
+			<if test="nameOpProUnit != null">
+				nameOpProUnit = #{nameOpProUnit},
+			</if>
+			<if test="idManager != null">
+				idManager = #{idManager},
+			</if>
+			<if test="nameManager != null">
+				nameManager = #{nameManager},
+			</if>
+			<if test="idLeader != null">
+				idLeader = #{idLeader},
+			</if>
+			<if test="nameLeader != null">
+				nameLeader = #{nameLeader},
+			</if>
+			<if test="idChecker != null">
+				idChecker = #{idChecker},
+			</if>
+			<if test="nameChecker != null">
+				nameChecker = #{nameChecker},
+			</if>
+			<if test="dateExpect != null">
+				dateExpect = #{dateExpect},
+			</if>
+			<if test="hoursExpect != null">
+				hoursExpect = #{hoursExpect},
+			</if>
+			<if test="hoursActual != null">
+				hoursActual = #{hoursActual},
+			</if>
+			<if test="countOpCardApply != null">
+				countOpCardApply = #{countOpCardApply},
+			</if>
+			<if test="countOpCardSend != null">
+				countOpCardSend = #{countOpCardSend},
+			</if>
+			<if test="countOpDevicePower != null">
+				countOpDevicePower = #{countOpDevicePower},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="dateCreated != null">
+				dateCreated = #{dateCreated},
+			</if>
+			<if test="dateGrouped != null">
+				dateGrouped = #{dateGrouped},
+			</if>
+			<if test="dateTaken != null">
+				dateTaken = #{dateTaken},
+			</if>
+			<if test="datesStartup != null">
+				datesStartup = #{datesStartup},
+			</if>
+			<if test="dateOptioned != null">
+				dateOptioned = #{dateOptioned},
+			</if>
+			<if test="dateReturned != null">
+				dateReturned = #{dateReturned},
+			</if>
+			<if test="dateInputted != null">
+				dateInputted = #{dateInputted},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="statusComplete != null">
+				statusComplete = #{statusComplete},
+			</if>
+			<if test="tag != null">
+				tag = #{tag},
+			</if>
+			<if test="createUser != null">
+				createUser = #{createUser},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate},
+			</if>
+			<if test="createIp != null">
+				createIp = #{createIp},
+			</if>
+			<if test="modifiedUser != null">
+				modifiedUser = #{modifiedUser},
+			</if>
+			<if test="modifiedDate != null">
+				modifiedDate = #{modifiedDate},
+			</if>
+			<if test="modifiedIp != null">
+				modifiedIp = #{modifiedIp},
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.updateColumn"/>
+		</set>
+		WHERE
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.updateWhere"/>
+			<if test="original != null">
+				 AND modified = #{original}
+			</if>
+	</update>
+
+	<!-- 查询单个实体对象 -->
+	<select id="get" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.getColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.name, 
+			a.idOpProUnit, 
+			a.nameOpProUnit, 
+			a.idManager, 
+			a.nameManager, 
+			a.idLeader, 
+			a.nameLeader, 
+			a.idChecker, 
+			a.nameChecker, 
+			a.dateExpect, 
+			a.hoursExpect, 
+			a.hoursActual, 
+			a.countOpCardApply, 
+			a.countOpCardSend, 
+			a.countOpDevicePower, 
+			a.description, 
+			a.remark, 
+			a.dateCreated, 
+			a.dateGrouped, 
+			a.dateTaken, 
+			a.datesStartup, 
+			a.dateOptioned, 
+			a.dateReturned, 
+			a.dateInputted, 
+			a.status, 
+			a.statusComplete, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opWorkOrder AS a
+		<include refid="com.framework.dao.OpWorkOrderConditionMapper.getFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="idOpProUnit != null">
+				AND a.idOpProUnit = #{idOpProUnit}
+			</if>
+			<if test="nameOpProUnit != null">
+				AND a.nameOpProUnit = #{nameOpProUnit}
+			</if>
+			<if test="idManager != null">
+				AND a.idManager = #{idManager}
+			</if>
+			<if test="nameManager != null">
+				AND a.nameManager = #{nameManager}
+			</if>
+			<if test="idLeader != null">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="nameLeader != null">
+				AND a.nameLeader = #{nameLeader}
+			</if>
+			<if test="idChecker != null">
+				AND a.idChecker = #{idChecker}
+			</if>
+			<if test="nameChecker != null">
+				AND a.nameChecker = #{nameChecker}
+			</if>
+			<if test="dateExpect != null">
+				AND a.dateExpect = #{dateExpect}
+			</if>
+			<if test="hoursExpect != null">
+				AND a.hoursExpect = #{hoursExpect}
+			</if>
+			<if test="hoursActual != null">
+				AND a.hoursActual = #{hoursActual}
+			</if>
+			<if test="countOpCardApply != null">
+				AND a.countOpCardApply = #{countOpCardApply}
+			</if>
+			<if test="countOpCardSend != null">
+				AND a.countOpCardSend = #{countOpCardSend}
+			</if>
+			<if test="countOpDevicePower != null">
+				AND a.countOpDevicePower = #{countOpDevicePower}
+			</if>
+			<if test="description != null">
+				AND a.description = #{description}
+			</if>
+			<if test="remark != null">
+				AND a.remark = #{remark}
+			</if>
+			<if test="dateCreated != null">
+				AND a.dateCreated = #{dateCreated}
+			</if>
+			<if test="dateGrouped != null">
+				AND a.dateGrouped = #{dateGrouped}
+			</if>
+			<if test="dateTaken != null">
+				AND a.dateTaken = #{dateTaken}
+			</if>
+			<if test="datesStartup != null">
+				AND a.datesStartup = #{datesStartup}
+			</if>
+			<if test="dateOptioned != null">
+				AND a.dateOptioned = #{dateOptioned}
+			</if>
+			<if test="dateReturned != null">
+				AND a.dateReturned = #{dateReturned}
+			</if>
+			<if test="dateInputted != null">
+				AND a.dateInputted = #{dateInputted}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="statusComplete != null">
+				AND a.statusComplete = #{statusComplete}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.getWhere"/>
+		</where>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		LIMIT 1
+	</select>
+
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.name, 
+			a.idOpProUnit, 
+			a.nameOpProUnit, 
+			a.idManager, 
+			a.nameManager, 
+			a.idLeader, 
+			a.nameLeader, 
+			a.idChecker, 
+			a.nameChecker, 
+			a.dateExpect, 
+			a.hoursExpect, 
+			a.hoursActual, 
+			a.countOpCardApply, 
+			a.countOpCardSend, 
+			a.countOpDevicePower, 
+			a.description, 
+			a.remark, 
+			a.dateCreated, 
+			a.dateGrouped, 
+			a.dateTaken, 
+			a.datesStartup, 
+			a.dateOptioned, 
+			a.dateReturned, 
+			a.dateInputted, 
+			a.status, 
+			a.statusComplete, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opWorkOrder AS a
+		<include refid="com.framework.dao.OpWorkOrderConditionMapper.searchFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="idOpProUnit != null and idOpProUnit != ''">
+				AND a.idOpProUnit = #{idOpProUnit}
+			</if>
+			<if test="nameOpProUnit != null and nameOpProUnit != ''">
+				AND a.nameOpProUnit = #{nameOpProUnit}
+			</if>
+			<if test="idManager != null and idManager != ''">
+				AND a.idManager = #{idManager}
+			</if>
+			<if test="nameManager != null and nameManager != ''">
+				AND a.nameManager = #{nameManager}
+			</if>
+			<if test="idLeader != null and idLeader != ''">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="nameLeader != null and nameLeader != ''">
+				AND a.nameLeader = #{nameLeader}
+			</if>
+			<if test="idChecker != null and idChecker != ''">
+				AND a.idChecker = #{idChecker}
+			</if>
+			<if test="nameChecker != null and nameChecker != ''">
+				AND a.nameChecker = #{nameChecker}
+			</if>
+			<if test="dateExpect != null and dateExpect != ''">
+				AND a.dateExpect = #{dateExpect}
+			</if>
+			<if test="hoursExpect != null and hoursExpect != ''">
+				AND a.hoursExpect = #{hoursExpect}
+			</if>
+			<if test="hoursActual != null and hoursActual != ''">
+				AND a.hoursActual = #{hoursActual}
+			</if>
+			<if test="countOpCardApply != null and countOpCardApply != ''">
+				AND a.countOpCardApply = #{countOpCardApply}
+			</if>
+			<if test="countOpCardSend != null and countOpCardSend != ''">
+				AND a.countOpCardSend = #{countOpCardSend}
+			</if>
+			<if test="countOpDevicePower != null and countOpDevicePower != ''">
+				AND a.countOpDevicePower = #{countOpDevicePower}
+			</if>
+			<if test="description != null and description != ''">
+				AND a.description = #{description}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+			<if test="dateCreated != null and dateCreated != ''">
+				AND a.dateCreated = #{dateCreated}
+			</if>
+			<if test="dateGrouped != null and dateGrouped != ''">
+				AND a.dateGrouped = #{dateGrouped}
+			</if>
+			<if test="dateTaken != null and dateTaken != ''">
+				AND a.dateTaken = #{dateTaken}
+			</if>
+			<if test="datesStartup != null and datesStartup != ''">
+				AND a.datesStartup = #{datesStartup}
+			</if>
+			<if test="dateOptioned != null and dateOptioned != ''">
+				AND a.dateOptioned = #{dateOptioned}
+			</if>
+			<if test="dateReturned != null and dateReturned != ''">
+				AND a.dateReturned = #{dateReturned}
+			</if>
+			<if test="dateInputted != null and dateInputted != ''">
+				AND a.dateInputted = #{dateInputted}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="statusComplete != null and statusComplete != ''">
+				AND a.statusComplete = #{statusComplete}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.searchWhere"/>
+		</where>
+		<if test="group != null">
+			GROUP BY ${group}
+		</if>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		<if test="rows != 0">
+			LIMIT ${startIndex}, ${rows}
+		</if>
+	</select>
+
+	<!-- 查询实体对象记录数 -->
+	<select id="count" parameterType="java.lang.Object" resultType="int">
+		SELECT COUNT(1) FROM opWorkOrder AS a
+		<include refid="com.framework.dao.OpWorkOrderConditionMapper.searchFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="idOpProUnit != null and idOpProUnit != ''">
+				AND a.idOpProUnit = #{idOpProUnit}
+			</if>
+			<if test="nameOpProUnit != null and nameOpProUnit != ''">
+				AND a.nameOpProUnit = #{nameOpProUnit}
+			</if>
+			<if test="idManager != null and idManager != ''">
+				AND a.idManager = #{idManager}
+			</if>
+			<if test="nameManager != null and nameManager != ''">
+				AND a.nameManager = #{nameManager}
+			</if>
+			<if test="idLeader != null and idLeader != ''">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="nameLeader != null and nameLeader != ''">
+				AND a.nameLeader = #{nameLeader}
+			</if>
+			<if test="idChecker != null and idChecker != ''">
+				AND a.idChecker = #{idChecker}
+			</if>
+			<if test="nameChecker != null and nameChecker != ''">
+				AND a.nameChecker = #{nameChecker}
+			</if>
+			<if test="dateExpect != null and dateExpect != ''">
+				AND a.dateExpect = #{dateExpect}
+			</if>
+			<if test="hoursExpect != null and hoursExpect != ''">
+				AND a.hoursExpect = #{hoursExpect}
+			</if>
+			<if test="hoursActual != null and hoursActual != ''">
+				AND a.hoursActual = #{hoursActual}
+			</if>
+			<if test="countOpCardApply != null and countOpCardApply != ''">
+				AND a.countOpCardApply = #{countOpCardApply}
+			</if>
+			<if test="countOpCardSend != null and countOpCardSend != ''">
+				AND a.countOpCardSend = #{countOpCardSend}
+			</if>
+			<if test="countOpDevicePower != null and countOpDevicePower != ''">
+				AND a.countOpDevicePower = #{countOpDevicePower}
+			</if>
+			<if test="description != null and description != ''">
+				AND a.description = #{description}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+			<if test="dateCreated != null and dateCreated != ''">
+				AND a.dateCreated = #{dateCreated}
+			</if>
+			<if test="dateGrouped != null and dateGrouped != ''">
+				AND a.dateGrouped = #{dateGrouped}
+			</if>
+			<if test="dateTaken != null and dateTaken != ''">
+				AND a.dateTaken = #{dateTaken}
+			</if>
+			<if test="datesStartup != null and datesStartup != ''">
+				AND a.datesStartup = #{datesStartup}
+			</if>
+			<if test="dateOptioned != null and dateOptioned != ''">
+				AND a.dateOptioned = #{dateOptioned}
+			</if>
+			<if test="dateReturned != null and dateReturned != ''">
+				AND a.dateReturned = #{dateReturned}
+			</if>
+			<if test="dateInputted != null and dateInputted != ''">
+				AND a.dateInputted = #{dateInputted}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="statusComplete != null and statusComplete != ''">
+				AND a.statusComplete = #{statusComplete}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.searchWhere"/>
+		</where>
+	</select>
+
+	<!-- 查询实体分页对象集合 -->
+	<select id="selectPage" parameterType="java.lang.Object" resultMap="opWorkOrder">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.name, 
+			a.idOpProUnit, 
+			a.nameOpProUnit, 
+			a.idManager, 
+			a.nameManager, 
+			a.idLeader, 
+			a.nameLeader, 
+			a.idChecker, 
+			a.nameChecker, 
+			a.dateExpect, 
+			a.hoursExpect, 
+			a.hoursActual, 
+			a.countOpCardApply, 
+			a.countOpCardSend, 
+			a.countOpDevicePower, 
+			a.description, 
+			a.remark, 
+			a.dateCreated, 
+			a.dateGrouped, 
+			a.dateTaken, 
+			a.datesStartup, 
+			a.dateOptioned, 
+			a.dateReturned, 
+			a.dateInputted, 
+			a.status, 
+			a.statusComplete, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opWorkOrder AS a
+		<include refid="com.framework.dao.OpWorkOrderConditionMapper.searchFrom"/>
+		<where>
+			a.tag != 'd' AND ${sqlWhere}
+		</where>
+		ORDER BY ${orderBy}
+	</select>
+
+	<!-- 查询树形结构 -->
+	<select id="selectTree" parameterType="java.lang.Object" resultMap="opWorkOrder" resultType="java.util.HashMap">
+		SELECT 
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.selectTreeColumn"/>
+			a.id AS value,
+			a.name AS title
+		FROM opWorkOrder AS a
+		<include refid="com.framework.dao.OpWorkOrderConditionMapper.selectTreeFrom"/>
+		<where>
+				a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="idOpProUnit != null">
+				AND a.idOpProUnit = #{idOpProUnit}
+			</if>
+			<if test="nameOpProUnit != null">
+				AND a.nameOpProUnit = #{nameOpProUnit}
+			</if>
+			<if test="idManager != null">
+				AND a.idManager = #{idManager}
+			</if>
+			<if test="nameManager != null">
+				AND a.nameManager = #{nameManager}
+			</if>
+			<if test="idLeader != null">
+				AND a.idLeader = #{idLeader}
+			</if>
+			<if test="nameLeader != null">
+				AND a.nameLeader = #{nameLeader}
+			</if>
+			<if test="idChecker != null">
+				AND a.idChecker = #{idChecker}
+			</if>
+			<if test="nameChecker != null">
+				AND a.nameChecker = #{nameChecker}
+			</if>
+			<if test="dateExpect != null">
+				AND a.dateExpect = #{dateExpect}
+			</if>
+			<if test="hoursExpect != null">
+				AND a.hoursExpect = #{hoursExpect}
+			</if>
+			<if test="hoursActual != null">
+				AND a.hoursActual = #{hoursActual}
+			</if>
+			<if test="countOpCardApply != null">
+				AND a.countOpCardApply = #{countOpCardApply}
+			</if>
+			<if test="countOpCardSend != null">
+				AND a.countOpCardSend = #{countOpCardSend}
+			</if>
+			<if test="countOpDevicePower != null">
+				AND a.countOpDevicePower = #{countOpDevicePower}
+			</if>
+			<if test="description != null">
+				AND a.description = #{description}
+			</if>
+			<if test="remark != null">
+				AND a.remark = #{remark}
+			</if>
+			<if test="dateCreated != null">
+				AND a.dateCreated = #{dateCreated}
+			</if>
+			<if test="dateGrouped != null">
+				AND a.dateGrouped = #{dateGrouped}
+			</if>
+			<if test="dateTaken != null">
+				AND a.dateTaken = #{dateTaken}
+			</if>
+			<if test="datesStartup != null">
+				AND a.datesStartup = #{datesStartup}
+			</if>
+			<if test="dateOptioned != null">
+				AND a.dateOptioned = #{dateOptioned}
+			</if>
+			<if test="dateReturned != null">
+				AND a.dateReturned = #{dateReturned}
+			</if>
+			<if test="dateInputted != null">
+				AND a.dateInputted = #{dateInputted}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="statusComplete != null">
+				AND a.statusComplete = #{statusComplete}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpWorkOrderConditionMapper.selectTreeWhere"/>
+		</where>
+	</select>
+
+</mapper>

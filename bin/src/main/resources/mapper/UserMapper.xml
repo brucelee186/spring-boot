@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->  
+<mapper namespace="com.framework.mapper.UserMapper">  
+
+    <!-- insert user -->
+    <insert id = "insert" parameterType="com.framework.bean.User">
+        INSERT INTO 
+        	user(id, username, passwork, age) 
+        VALUES
+        	(#{id}, #{username}, #{password}, #{age});
+    </insert>
+    
+    <!-- update user -->
+    <update id="update" parameterType="com.framework.bean.User">
+        UPDATE 
+        	user
+        SET 
+        	username = #{username}, 
+        	password = #{password} , 
+        	age = #{age} 
+        WHERE 
+        	id = #{id}
+    </update>
+    
+    <!-- find user -->
+    <select id="get" parameterType="int" resultType="com.framework.bean.User">
+        SELECT 
+        	id,
+        	username,
+        	password,
+        	age
+        FROM 
+        	user 
+        WHERE 
+        	id = #{id}
+    </select>
+    
+    <!-- delete user -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM user WHERE id= #{id}
+    </delete>
+</mapper>

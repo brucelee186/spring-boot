@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.MaManagerMapper" > 
+	<resultMap type="com.framework.bean.impl.MaManagerImpl" id="maManager"/> 
+	<!-- 添加实体对象 -->
+	<insert id="insert" parameterType="java.lang.Object">
+		INSERT INTO maManager
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="idLogic != null">
+					idLogic,
+				</if>
+				<if test="sn != null">
+					sn,
+				</if>
+				<if test="idRole != null">
+					idRole,
+				</if>
+				<if test="typeRole != null">
+					typeRole,
+				</if>
+				<if test="userName != null">
+					userName,
+				</if>
+				<if test="realRame != null">
+					realRame,
+				</if>
+				<if test="password != null">
+					password,
+				</if>
+				<if test="createUser != null">
+					createUser,
+				</if>
+				<if test="createDate != null">
+					createDate,
+				</if>
+				<if test="createIp != null">
+					createIp,
+				</if>
+				<if test="modifiedUser != null">
+					modifiedUser,
+				</if>
+				<if test="modifiedDate != null">
+					modifiedDate,
+				</if>
+				<if test="modifiedIp != null">
+					modifiedIp,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="idLogic != null">
+					#{idLogic},
+				</if>
+				<if test="sn != null">
+					#{sn},
+				</if>
+				<if test="idRole != null">
+					#{idRole},
+				</if>
+				<if test="typeRole != null">
+					#{typeRole},
+				</if>
+				<if test="userName != null">
+					#{userName},
+				</if>
+				<if test="realRame != null">
+					#{realRame},
+				</if>
+				<if test="password != null">
+					#{password},
+				</if>
+				<if test="createUser != null">
+					#{createUser},
+				</if>
+				<if test="createDate != null">
+					#{createDate},
+				</if>
+				<if test="createIp != null">
+					#{createIp},
+				</if>
+				<if test="modifiedUser != null">
+					#{modifiedUser},
+				</if>
+				<if test="modifiedDate != null">
+					#{modifiedDate},
+				</if>
+				<if test="modifiedIp != null">
+					#{modifiedIp},
+				</if>
+			</trim>
+			<selectKey resultType="long" keyProperty="id">
+				SELECT LAST_INSERT_ID() AS ID
+			</selectKey>
+	</insert>
+
+	<!-- 删除实体对象 -->
+	<delete id="delete" parameterType="java.lang.Object">
+		DELETE FROM maManager
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="idLogic != null and idLogic != ''">
+				AND idLogic = #{idLogic}
+			</if>
+			<if test="sn != null and sn != ''">
+				AND sn = #{sn}
+			</if>
+			<if test="idRole != null and idRole != ''">
+				AND idRole = #{idRole}
+			</if>
+			<if test="typeRole != null and typeRole != ''">
+				AND typeRole = #{typeRole}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND userName = #{userName}
+			</if>
+			<if test="realRame != null and realRame != ''">
+				AND realRame = #{realRame}
+			</if>
+			<if test="password != null and password != ''">
+				AND password = #{password}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaManagerConditionMapper.searchWhere"/>
+		</where>
+	</delete>
+
+	<!-- 更新实体对象 -->
+	<update id="update" parameterType="java.lang.Object">
+		UPDATE maManager
+		<set>
+			<if test="id != null and id != ''">
+				id = #{id},
+			</if>
+			<if test="idLogic != null and idLogic != ''">
+				idLogic = #{idLogic},
+			</if>
+			<if test="sn != null and sn != ''">
+				sn = #{sn},
+			</if>
+			<if test="idRole != null and idRole != ''">
+				idRole = #{idRole},
+			</if>
+			<if test="typeRole != null and typeRole != ''">
+				typeRole = #{typeRole},
+			</if>
+			<if test="userName != null and userName != ''">
+				userName = #{userName},
+			</if>
+			<if test="realRame != null and realRame != ''">
+				realRame = #{realRame},
+			</if>
+			<if test="password != null and password != ''">
+				password = #{password},
+			</if>
+			<if test="createUser != null and createUser != ''">
+				createUser = #{createUser},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate},
+			</if>
+			<if test="createIp != null and createIp != ''">
+				createIp = #{createIp},
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				modifiedUser = #{modifiedUser},
+			</if>
+			<if test="modifiedDate != null">
+				modifiedDate = #{modifiedDate},
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				modifiedIp = #{modifiedIp},
+			</if>
+			<include refid="com.framework.dao.MaManagerConditionMapper.updateColumn"/>
+		</set>
+		WHERE
+			<include refid="com.framework.dao.MaManagerConditionMapper.updateWhere"/>
+			<if test="original != null">
+				 AND modified = #{original}
+			</if>
+	</update>
+
+	<!-- 查询单个实体对象 -->
+	<select id="get" parameterType="java.lang.Object" resultMap="maManager">
+		SELECT 
+			<include refid="com.framework.dao.MaManagerConditionMapper.getColumn"/>
+			a.id, 
+			a.idLogic, 
+			a.sn, 
+			a.idRole, 
+			a.typeRole, 
+			a.userName, 
+			a.realRame, 
+			a.password, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM maManager AS a
+		<include refid="com.framework.dao.MaManagerConditionMapper.getFrom"/>
+		<where>
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="idLogic != null">
+				AND a.idLogic = #{idLogic}
+			</if>
+			<if test="sn != null">
+				AND a.sn = #{sn}
+			</if>
+			<if test="idRole != null">
+				AND a.idRole = #{idRole}
+			</if>
+			<if test="typeRole != null">
+				AND a.typeRole = #{typeRole}
+			</if>
+			<if test="userName != null">
+				AND a.userName = #{userName}
+			</if>
+			<if test="realRame != null">
+				AND a.realRame = #{realRame}
+			</if>
+			<if test="password != null">
+				AND a.password = #{password}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaManagerConditionMapper.getWhere"/>
+		</where>
+		LIMIT 1
+	</select>
+
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="maManager">
+		SELECT 
+			<include refid="com.framework.dao.MaManagerConditionMapper.selectColumn"/>
+			a.id, 
+			a.idLogic, 
+			a.sn, 
+			a.idRole, 
+			a.typeRole, 
+			a.userName, 
+			a.realRame, 
+			a.password, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM maManager AS a
+		<include refid="com.framework.dao.MaManagerConditionMapper.searchFrom"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="idLogic != null and idLogic != ''">
+				AND a.idLogic = #{idLogic}
+			</if>
+			<if test="sn != null and sn != ''">
+				AND a.sn = #{sn}
+			</if>
+			<if test="idRole != null and idRole != ''">
+				AND a.idRole = #{idRole}
+			</if>
+			<if test="typeRole != null and typeRole != ''">
+				AND a.typeRole = #{typeRole}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND a.userName = #{userName}
+			</if>
+			<if test="realRame != null and realRame != ''">
+				AND a.realRame = #{realRame}
+			</if>
+			<if test="password != null and password != ''">
+				AND a.password = #{password}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaManagerConditionMapper.searchWhere"/>
+		</where>
+		<if test="group != null">
+			GROUP BY ${group}
+		</if>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		<if test="rows != 0">
+			LIMIT ${startIndex}, ${rows}
+		</if>
+	</select>
+
+	<!-- 查询实体对象记录数 -->
+	<select id="count" parameterType="java.lang.Object" resultType="int">
+		SELECT COUNT(1) FROM maManager AS a
+		<include refid="com.framework.dao.MaManagerConditionMapper.searchFrom"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="idLogic != null and idLogic != ''">
+				AND a.idLogic = #{idLogic}
+			</if>
+			<if test="sn != null and sn != ''">
+				AND a.sn = #{sn}
+			</if>
+			<if test="idRole != null and idRole != ''">
+				AND a.idRole = #{idRole}
+			</if>
+			<if test="typeRole != null and typeRole != ''">
+				AND a.typeRole = #{typeRole}
+			</if>
+			<if test="userName != null and userName != ''">
+				AND a.userName = #{userName}
+			</if>
+			<if test="realRame != null and realRame != ''">
+				AND a.realRame = #{realRame}
+			</if>
+			<if test="password != null and password != ''">
+				AND a.password = #{password}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaManagerConditionMapper.searchWhere"/>
+		</where>
+	</select>
+
+	<!-- 查询实体分页对象集合 -->
+	<select id="selectPage" parameterType="java.lang.Object" resultMap="maManager">
+		SELECT 
+			<include refid="com.framework.dao.MaManagerConditionMapper.selectColumn"/>
+			a.id, 
+			a.idLogic, 
+			a.sn, 
+			a.idRole, 
+			a.typeRole, 
+			a.userName, 
+			a.realRame, 
+			a.password, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM maManager AS a
+		<include refid="com.framework.dao.MaManagerConditionMapper.searchFrom"/>
+		<where>
+			a.tag != 'd' AND ${sqlWhere}
+		</where>
+		ORDER BY ${orderBy}
+	</select>
+
+</mapper>

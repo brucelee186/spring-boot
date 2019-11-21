@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpRoomOperationMapper" > 
+	<resultMap type="com.framework.bean.impl.OpRoomOperationImpl" id="opRoomOperation"/> 
+	<!-- 添加实体对象 -->
+	<insert id="insert" parameterType="java.lang.Object">
+		INSERT INTO opRoomOperation
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="uid != null">
+					uid,
+				</if>
+				<if test="idMaCompany != null">
+					idMaCompany,
+				</if>
+				<if test="idMaUser != null">
+					idMaUser,
+				</if>
+				<if test="name != null">
+					name,
+				</if>
+				<if test="code != null">
+					code,
+				</if>
+				<if test="remark != null">
+					remark,
+				</if>
+				<if test="status != null">
+					status,
+				</if>
+				<if test="tag != null">
+					tag,
+				</if>
+				<if test="createUser != null">
+					createUser,
+				</if>
+				<if test="createDate != null">
+					createDate,
+				</if>
+				<if test="createIp != null">
+					createIp,
+				</if>
+				<if test="modifiedUser != null">
+					modifiedUser,
+				</if>
+				<if test="modifiedDate != null">
+					modifiedDate,
+				</if>
+				<if test="modifiedIp != null">
+					modifiedIp,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="uid != null">
+					#{uid},
+				</if>
+				<if test="idMaCompany != null">
+					#{idMaCompany},
+				</if>
+				<if test="idMaUser != null">
+					#{idMaUser},
+				</if>
+				<if test="name != null">
+					#{name},
+				</if>
+				<if test="code != null">
+					#{code},
+				</if>
+				<if test="remark != null">
+					#{remark},
+				</if>
+				<if test="status != null">
+					#{status},
+				</if>
+				<if test="tag != null">
+					#{tag},
+				</if>
+				<if test="createUser != null">
+					#{createUser},
+				</if>
+				<if test="createDate != null">
+					#{createDate},
+				</if>
+				<if test="createIp != null">
+					#{createIp},
+				</if>
+				<if test="modifiedUser != null">
+					#{modifiedUser},
+				</if>
+				<if test="modifiedDate != null">
+					#{modifiedDate},
+				</if>
+				<if test="modifiedIp != null">
+					#{modifiedIp},
+				</if>
+			</trim>
+			<selectKey resultType="long" keyProperty="id">
+				SELECT LAST_INSERT_ID() AS ID
+			</selectKey>
+	</insert>
+
+	<!-- 删除实体对象 -->
+	<delete id="delete" parameterType="java.lang.Object">
+		DELETE FROM opRoomOperation
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idMaUser != null and idMaUser != ''">
+				AND idMaUser = #{idMaUser}
+			</if>
+			<if test="name != null and name != ''">
+				AND name = #{name}
+			</if>
+			<if test="code != null and code != ''">
+				AND code = #{code}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.searchWhere"/>
+		</where>
+	</delete>
+
+	<!-- 更新实体对象 -->
+	<update id="update" parameterType="java.lang.Object">
+		UPDATE opRoomOperation
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="uid != null">
+				uid = #{uid},
+			</if>
+			<if test="idMaCompany != null">
+				idMaCompany = #{idMaCompany},
+			</if>
+			<if test="idMaUser != null">
+				idMaUser = #{idMaUser},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="code != null">
+				code = #{code},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="tag != null">
+				tag = #{tag},
+			</if>
+			<if test="createUser != null">
+				createUser = #{createUser},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate},
+			</if>
+			<if test="createIp != null">
+				createIp = #{createIp},
+			</if>
+			<if test="modifiedUser != null">
+				modifiedUser = #{modifiedUser},
+			</if>
+			<if test="modifiedDate != null">
+				modifiedDate = #{modifiedDate},
+			</if>
+			<if test="modifiedIp != null">
+				modifiedIp = #{modifiedIp},
+			</if>
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.updateColumn"/>
+		</set>
+		WHERE
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.updateWhere"/>
+			<if test="original != null">
+				 AND modified = #{original}
+			</if>
+	</update>
+
+	<!-- 查询单个实体对象 -->
+	<select id="get" parameterType="java.lang.Object" resultMap="opRoomOperation">
+		SELECT 
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.getColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idMaUser, 
+			a.name, 
+			a.code, 
+			a.remark, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opRoomOperation AS a
+		<include refid="com.framework.dao.OpRoomOperationConditionMapper.getFrom"/>
+		<where>
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idMaUser != null">
+				AND a.idMaUser = #{idMaUser}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="code != null">
+				AND a.code = #{code}
+			</if>
+			<if test="remark != null">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.getWhere"/>
+		</where>
+		LIMIT 1
+	</select>
+
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="opRoomOperation">
+		SELECT 
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idMaUser, 
+			a.name, 
+			a.code, 
+			a.remark, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opRoomOperation AS a
+		<include refid="com.framework.dao.OpRoomOperationConditionMapper.searchFrom"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idMaUser != null and idMaUser != ''">
+				AND a.idMaUser = #{idMaUser}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="code != null and code != ''">
+				AND a.code = #{code}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.searchWhere"/>
+		</where>
+		<if test="group != null">
+			GROUP BY ${group}
+		</if>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		<if test="rows != 0">
+			LIMIT ${startIndex}, ${rows}
+		</if>
+	</select>
+
+	<!-- 查询实体对象记录数 -->
+	<select id="count" parameterType="java.lang.Object" resultType="int">
+		SELECT COUNT(1) FROM opRoomOperation AS a
+		<include refid="com.framework.dao.OpRoomOperationConditionMapper.searchFrom"/>
+		<where>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="idMaUser != null and idMaUser != ''">
+				AND a.idMaUser = #{idMaUser}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="code != null and code != ''">
+				AND a.code = #{code}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.searchWhere"/>
+		</where>
+	</select>
+
+	<!-- 查询实体分页对象集合 -->
+	<select id="selectPage" parameterType="java.lang.Object" resultMap="opRoomOperation">
+		SELECT 
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.idMaCompany, 
+			a.idMaUser, 
+			a.name, 
+			a.code, 
+			a.remark, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM opRoomOperation AS a
+		<include refid="com.framework.dao.OpRoomOperationConditionMapper.searchFrom"/>
+		<where>
+			a.tag != 'd' AND ${sqlWhere}
+		</where>
+		ORDER BY ${orderBy}
+	</select>
+
+	<!-- 查询树形结构 -->
+	<select id="selectTree" parameterType="java.lang.Object" resultMap="opRoomOperation" resultType="java.util.HashMap">
+		SELECT 
+			<include refid="com.framework.dao.OpRoomOperationConditionMapper.selectTreeColumn"/>
+			a.id AS value,
+			a.name AS title
+		FROM opRoomOperation AS a
+		<include refid="com.framework.dao.OpRoomOperationConditionMapper.selectTreeFrom"/>
+		<where>
+				a.tag != 'd'
+			AND
+				a.idMaCompany = #{idMaCompany}
+		</where>
+	</select>
+
+</mapper>

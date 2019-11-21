@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.MaOrgnizationLevelConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.MaOrgnizationLevelImpl" id="maOrgnizationLevel"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		a.id value,
+		a.name title,
+		IFNULL(b.name, '') nameMaCompany, 
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN maCompany AS b ON b.id = a.idMaCompany
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+	
+	<select id="findNameId" resultType="java.util.HashMap">
+		SELECT 
+			id, 
+			name AS name
+		FROM
+			maOrgnizationLevel
+		where 
+			tag != 'd' 
+		AND
+			${sqlWhere} 
+		ORDER BY
+			${orderBy}
+	</select>
+	
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>	
+</mapper>

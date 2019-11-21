@@ -1,0 +1,921 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.MaUserMapper" > 
+	<resultMap type="com.framework.bean.impl.MaUserImpl" id="maUser"/> 
+	<!-- 添加实体对象 -->
+	<insert id="insert" parameterType="java.lang.Object">
+		INSERT INTO maUser
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					id,
+				</if>
+				<if test="uid != null">
+					uid,
+				</if>
+				<if test="loginName != null">
+					loginName,
+				</if>
+				<if test="password != null">
+					password,
+				</if>
+				<if test="name != null">
+					name,
+				</if>
+				<if test="idMaRole != null">
+					idMaRole,
+				</if>
+				<if test="nameMaRole != null">
+					nameMaRole,
+				</if>
+				<if test="codeMaRole != null">
+					codeMaRole,
+				</if>
+				<if test="idMaCompany != null">
+					idMaCompany,
+				</if>
+				<if test="nameMaCompany != null">
+					nameMaCompany,
+				</if>
+				<if test="uidMaCompany != null">
+					uidMaCompany,
+				</if>
+				<if test="idMaOrgnization != null">
+					idMaOrgnization,
+				</if>
+				<if test="nameMaOrgnization != null">
+					nameMaOrgnization,
+				</if>
+				<if test="cellphone != null">
+					cellphone,
+				</if>
+				<if test="profilePhoto != null">
+					profilePhoto,
+				</if>
+				<if test="badgeNumber != null">
+					badgeNumber,
+				</if>
+				<if test="email != null">
+					email,
+				</if>
+				<if test="gender != null">
+					gender,
+				</if>
+				<if test="indexMaFingerprint != null">
+					indexMaFingerprint,
+				</if>
+				<if test="codeMaFingerprint != null">
+					codeMaFingerprint,
+				</if>
+				<if test="fingerPrint != null">
+					fingerPrint,
+				</if>
+				<if test="remark != null">
+					remark,
+				</if>
+				<if test="status != null">
+					status,
+				</if>
+				<if test="tag != null">
+					tag,
+				</if>
+				<if test="createUser != null">
+					createUser,
+				</if>
+				<if test="createDate != null">
+					createDate,
+				</if>
+				<if test="createIp != null">
+					createIp,
+				</if>
+				<if test="modifiedUser != null">
+					modifiedUser,
+				</if>
+				<if test="modifiedDate != null">
+					modifiedDate,
+				</if>
+				<if test="modifiedIp != null">
+					modifiedIp,
+				</if>
+			</trim>
+			<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="uid != null">
+					#{uid},
+				</if>
+				<if test="loginName != null">
+					#{loginName},
+				</if>
+				<if test="password != null">
+					#{password},
+				</if>
+				<if test="name != null">
+					#{name},
+				</if>
+				<if test="idMaRole != null">
+					#{idMaRole},
+				</if>
+				<if test="nameMaRole != null">
+					#{nameMaRole},
+				</if>
+				<if test="codeMaRole != null">
+					#{codeMaRole},
+				</if>
+				<if test="idMaCompany != null">
+					#{idMaCompany},
+				</if>
+				<if test="nameMaCompany != null">
+					#{nameMaCompany},
+				</if>
+				<if test="uidMaCompany != null">
+					#{uidMaCompany},
+				</if>
+				<if test="idMaOrgnization != null">
+					#{idMaOrgnization},
+				</if>
+				<if test="nameMaOrgnization != null">
+					#{nameMaOrgnization},
+				</if>
+				<if test="cellphone != null">
+					#{cellphone},
+				</if>
+				<if test="profilePhoto != null">
+					#{profilePhoto},
+				</if>
+				<if test="badgeNumber != null">
+					#{badgeNumber},
+				</if>
+				<if test="email != null">
+					#{email},
+				</if>
+				<if test="gender != null">
+					#{gender},
+				</if>
+				<if test="indexMaFingerprint != null">
+					#{indexMaFingerprint},
+				</if>
+				<if test="codeMaFingerprint != null">
+					#{codeMaFingerprint},
+				</if>
+				<if test="fingerPrint != null">
+					#{fingerPrint},
+				</if>
+				<if test="remark != null">
+					#{remark},
+				</if>
+				<if test="status != null">
+					#{status},
+				</if>
+				<if test="tag != null">
+					#{tag},
+				</if>
+				<if test="createUser != null">
+					#{createUser},
+				</if>
+				<if test="createDate != null">
+					#{createDate},
+				</if>
+				<if test="createIp != null">
+					#{createIp},
+				</if>
+				<if test="modifiedUser != null">
+					#{modifiedUser},
+				</if>
+				<if test="modifiedDate != null">
+					#{modifiedDate},
+				</if>
+				<if test="modifiedIp != null">
+					#{modifiedIp},
+				</if>
+			</trim>
+			<selectKey resultType="long" keyProperty="id">
+				SELECT LAST_INSERT_ID() AS ID
+			</selectKey>
+	</insert>
+
+	<!-- 删除实体对象 -->
+	<delete id="delete" parameterType="java.lang.Object">
+		DELETE FROM maUser
+		<where>
+			<if test="id != null and id != ''">
+				AND id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND uid = #{uid}
+			</if>
+			<if test="loginName != null and loginName != ''">
+				AND loginName = #{loginName}
+			</if>
+			<if test="password != null and password != ''">
+				AND password = #{password}
+			</if>
+			<if test="name != null and name != ''">
+				AND name = #{name}
+			</if>
+			<if test="idMaRole != null and idMaRole != ''">
+				AND idMaRole = #{idMaRole}
+			</if>
+			<if test="nameMaRole != null and nameMaRole != ''">
+				AND nameMaRole = #{nameMaRole}
+			</if>
+			<if test="codeMaRole != null and codeMaRole != ''">
+				AND codeMaRole = #{codeMaRole}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND idMaCompany = #{idMaCompany}
+			</if>
+			<if test="nameMaCompany != null and nameMaCompany != ''">
+				AND nameMaCompany = #{nameMaCompany}
+			</if>
+			<if test="uidMaCompany != null and uidMaCompany != ''">
+				AND uidMaCompany = #{uidMaCompany}
+			</if>
+			<if test="idMaOrgnization != null and idMaOrgnization != ''">
+				AND idMaOrgnization = #{idMaOrgnization}
+			</if>
+			<if test="nameMaOrgnization != null and nameMaOrgnization != ''">
+				AND nameMaOrgnization = #{nameMaOrgnization}
+			</if>
+			<if test="cellphone != null and cellphone != ''">
+				AND cellphone = #{cellphone}
+			</if>
+			<if test="profilePhoto != null and profilePhoto != ''">
+				AND profilePhoto = #{profilePhoto}
+			</if>
+			<if test="badgeNumber != null and badgeNumber != ''">
+				AND badgeNumber = #{badgeNumber}
+			</if>
+			<if test="email != null and email != ''">
+				AND email = #{email}
+			</if>
+			<if test="gender != null and gender != ''">
+				AND gender = #{gender}
+			</if>
+			<if test="indexMaFingerprint != null and indexMaFingerprint != ''">
+				AND indexMaFingerprint = #{indexMaFingerprint}
+			</if>
+			<if test="codeMaFingerprint != null and codeMaFingerprint != ''">
+				AND codeMaFingerprint = #{codeMaFingerprint}
+			</if>
+			<if test="fingerPrint != null and fingerPrint != ''">
+				AND fingerPrint = #{fingerPrint}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND remark = #{remark}
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaUserConditionMapper.searchWhere"/>
+		</where>
+	</delete>
+
+	<!-- 更新实体对象 -->
+	<update id="update" parameterType="java.lang.Object">
+		UPDATE maUser
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="uid != null">
+				uid = #{uid},
+			</if>
+			<if test="loginName != null">
+				loginName = #{loginName},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="idMaRole != null">
+				idMaRole = #{idMaRole},
+			</if>
+			<if test="nameMaRole != null">
+				nameMaRole = #{nameMaRole},
+			</if>
+			<if test="codeMaRole != null">
+				codeMaRole = #{codeMaRole},
+			</if>
+			<if test="idMaCompany != null">
+				idMaCompany = #{idMaCompany},
+			</if>
+			<if test="nameMaCompany != null">
+				nameMaCompany = #{nameMaCompany},
+			</if>
+			<if test="uidMaCompany != null">
+				uidMaCompany = #{uidMaCompany},
+			</if>
+			<if test="idMaOrgnization != null">
+				idMaOrgnization = #{idMaOrgnization},
+			</if>
+			<if test="nameMaOrgnization != null">
+				nameMaOrgnization = #{nameMaOrgnization},
+			</if>
+			<if test="cellphone != null">
+				cellphone = #{cellphone},
+			</if>
+			<if test="profilePhoto != null">
+				profilePhoto = #{profilePhoto},
+			</if>
+			<if test="badgeNumber != null">
+				badgeNumber = #{badgeNumber},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="gender != null">
+				gender = #{gender},
+			</if>
+			<if test="indexMaFingerprint != null">
+				indexMaFingerprint = #{indexMaFingerprint},
+			</if>
+			<if test="codeMaFingerprint != null">
+				codeMaFingerprint = #{codeMaFingerprint},
+			</if>
+			<if test="fingerPrint != null">
+				fingerPrint = #{fingerPrint},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="tag != null">
+				tag = #{tag},
+			</if>
+			<if test="createUser != null">
+				createUser = #{createUser},
+			</if>
+			<if test="createDate != null">
+				createDate = #{createDate},
+			</if>
+			<if test="createIp != null">
+				createIp = #{createIp},
+			</if>
+			<if test="modifiedUser != null">
+				modifiedUser = #{modifiedUser},
+			</if>
+			<if test="modifiedDate != null">
+				modifiedDate = #{modifiedDate},
+			</if>
+			<if test="modifiedIp != null">
+				modifiedIp = #{modifiedIp},
+			</if>
+			<include refid="com.framework.dao.MaUserConditionMapper.updateColumn"/>
+		</set>
+		WHERE
+			<include refid="com.framework.dao.MaUserConditionMapper.updateWhere"/>
+			<if test="original != null">
+				 AND modified = #{original}
+			</if>
+	</update>
+
+	<!-- 查询单个实体对象 -->
+	<select id="get" parameterType="java.lang.Object" resultMap="maUser">
+		SELECT 
+			<include refid="com.framework.dao.MaUserConditionMapper.getColumn"/>
+			a.id, 
+			a.uid, 
+			a.loginName, 
+			a.password, 
+			a.name, 
+			a.idMaRole, 
+			a.nameMaRole, 
+			a.codeMaRole, 
+			a.idMaCompany, 
+			a.nameMaCompany, 
+			a.uidMaCompany, 
+			a.idMaOrgnization, 
+			a.nameMaOrgnization, 
+			a.cellphone, 
+			a.profilePhoto, 
+			a.badgeNumber, 
+			a.email, 
+			a.gender, 
+			a.indexMaFingerprint, 
+			a.codeMaFingerprint, 
+			a.fingerPrint, 
+			a.remark, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM maUser AS a
+		<include refid="com.framework.dao.MaUserConditionMapper.getFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="loginName != null">
+				AND a.loginName = #{loginName}
+			</if>
+			<if test="password != null">
+				AND a.password = #{password}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="idMaRole != null">
+				AND a.idMaRole = #{idMaRole}
+			</if>
+			<if test="nameMaRole != null">
+				AND a.nameMaRole = #{nameMaRole}
+			</if>
+			<if test="codeMaRole != null">
+				AND a.codeMaRole = #{codeMaRole}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="nameMaCompany != null">
+				AND a.nameMaCompany = #{nameMaCompany}
+			</if>
+			<if test="uidMaCompany != null">
+				AND a.uidMaCompany = #{uidMaCompany}
+			</if>
+			<if test="idMaOrgnization != null">
+				AND a.idMaOrgnization = #{idMaOrgnization}
+			</if>
+			<if test="nameMaOrgnization != null">
+				AND a.nameMaOrgnization = #{nameMaOrgnization}
+			</if>
+			<if test="cellphone != null">
+				AND a.cellphone = #{cellphone}
+			</if>
+			<if test="profilePhoto != null">
+				AND a.profilePhoto = #{profilePhoto}
+			</if>
+			<if test="badgeNumber != null">
+				AND a.badgeNumber = #{badgeNumber}
+			</if>
+			<if test="email != null">
+				AND a.email = #{email}
+			</if>
+			<if test="gender != null">
+				AND a.gender = #{gender}
+			</if>
+			<if test="indexMaFingerprint != null">
+				AND a.indexMaFingerprint = #{indexMaFingerprint}
+			</if>
+			<if test="codeMaFingerprint != null">
+				AND a.codeMaFingerprint = #{codeMaFingerprint}
+			</if>
+			<if test="fingerPrint != null">
+				AND a.fingerPrint = #{fingerPrint}
+			</if>
+			<if test="remark != null">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaUserConditionMapper.getWhere"/>
+		</where>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		LIMIT 1
+	</select>
+
+	<!-- 查询实体对象集合 -->
+	<select id="select" parameterType="java.lang.Object" resultMap="maUser">
+		SELECT 
+			<include refid="com.framework.dao.MaUserConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.loginName, 
+			a.password, 
+			a.name, 
+			a.idMaRole, 
+			a.nameMaRole, 
+			a.codeMaRole, 
+			a.idMaCompany, 
+			a.nameMaCompany, 
+			a.uidMaCompany, 
+			a.idMaOrgnization, 
+			a.nameMaOrgnization, 
+			a.cellphone, 
+			a.profilePhoto, 
+			a.badgeNumber, 
+			a.email, 
+			a.gender, 
+			a.indexMaFingerprint, 
+			a.codeMaFingerprint, 
+			a.fingerPrint, 
+			a.remark, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM maUser AS a
+		<include refid="com.framework.dao.MaUserConditionMapper.searchFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="loginName != null and loginName != ''">
+				AND a.loginName = #{loginName}
+			</if>
+			<if test="password != null and password != ''">
+				AND a.password = #{password}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="idMaRole != null and idMaRole != ''">
+				AND a.idMaRole = #{idMaRole}
+			</if>
+			<if test="nameMaRole != null and nameMaRole != ''">
+				AND a.nameMaRole = #{nameMaRole}
+			</if>
+			<if test="codeMaRole != null and codeMaRole != ''">
+				AND a.codeMaRole = #{codeMaRole}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="nameMaCompany != null and nameMaCompany != ''">
+				AND a.nameMaCompany = #{nameMaCompany}
+			</if>
+			<if test="uidMaCompany != null and uidMaCompany != ''">
+				AND a.uidMaCompany = #{uidMaCompany}
+			</if>
+			<if test="idMaOrgnization != null and idMaOrgnization != ''">
+				AND a.idMaOrgnization = #{idMaOrgnization}
+			</if>
+			<if test="nameMaOrgnization != null and nameMaOrgnization != ''">
+				AND a.nameMaOrgnization = #{nameMaOrgnization}
+			</if>
+			<if test="cellphone != null and cellphone != ''">
+				AND a.cellphone = #{cellphone}
+			</if>
+			<if test="profilePhoto != null and profilePhoto != ''">
+				AND a.profilePhoto = #{profilePhoto}
+			</if>
+			<if test="badgeNumber != null and badgeNumber != ''">
+				AND a.badgeNumber = #{badgeNumber}
+			</if>
+			<if test="email != null and email != ''">
+				AND a.email = #{email}
+			</if>
+			<if test="gender != null and gender != ''">
+				AND a.gender = #{gender}
+			</if>
+			<if test="indexMaFingerprint != null and indexMaFingerprint != ''">
+				AND a.indexMaFingerprint = #{indexMaFingerprint}
+			</if>
+			<if test="codeMaFingerprint != null and codeMaFingerprint != ''">
+				AND a.codeMaFingerprint = #{codeMaFingerprint}
+			</if>
+			<if test="fingerPrint != null and fingerPrint != ''">
+				AND a.fingerPrint = #{fingerPrint}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaUserConditionMapper.searchWhere"/>
+		</where>
+		<if test="group != null">
+			GROUP BY ${group}
+		</if>
+		<if test="sort != null">
+			ORDER BY ${sort} ${order}
+		</if>
+		<if test="rows != 0">
+			LIMIT ${startIndex}, ${rows}
+		</if>
+	</select>
+
+	<!-- 查询实体对象记录数 -->
+	<select id="count" parameterType="java.lang.Object" resultType="int">
+		SELECT COUNT(1) FROM maUser AS a
+		<include refid="com.framework.dao.MaUserConditionMapper.searchFrom"/>
+		<where>
+			 a.tag != 'd'
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null and uid != ''">
+				AND a.uid = #{uid}
+			</if>
+			<if test="loginName != null and loginName != ''">
+				AND a.loginName = #{loginName}
+			</if>
+			<if test="password != null and password != ''">
+				AND a.password = #{password}
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name = #{name}
+			</if>
+			<if test="idMaRole != null and idMaRole != ''">
+				AND a.idMaRole = #{idMaRole}
+			</if>
+			<if test="nameMaRole != null and nameMaRole != ''">
+				AND a.nameMaRole = #{nameMaRole}
+			</if>
+			<if test="codeMaRole != null and codeMaRole != ''">
+				AND a.codeMaRole = #{codeMaRole}
+			</if>
+			<if test="idMaCompany != null and idMaCompany != ''">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="nameMaCompany != null and nameMaCompany != ''">
+				AND a.nameMaCompany = #{nameMaCompany}
+			</if>
+			<if test="uidMaCompany != null and uidMaCompany != ''">
+				AND a.uidMaCompany = #{uidMaCompany}
+			</if>
+			<if test="idMaOrgnization != null and idMaOrgnization != ''">
+				AND a.idMaOrgnization = #{idMaOrgnization}
+			</if>
+			<if test="nameMaOrgnization != null and nameMaOrgnization != ''">
+				AND a.nameMaOrgnization = #{nameMaOrgnization}
+			</if>
+			<if test="cellphone != null and cellphone != ''">
+				AND a.cellphone = #{cellphone}
+			</if>
+			<if test="profilePhoto != null and profilePhoto != ''">
+				AND a.profilePhoto = #{profilePhoto}
+			</if>
+			<if test="badgeNumber != null and badgeNumber != ''">
+				AND a.badgeNumber = #{badgeNumber}
+			</if>
+			<if test="email != null and email != ''">
+				AND a.email = #{email}
+			</if>
+			<if test="gender != null and gender != ''">
+				AND a.gender = #{gender}
+			</if>
+			<if test="indexMaFingerprint != null and indexMaFingerprint != ''">
+				AND a.indexMaFingerprint = #{indexMaFingerprint}
+			</if>
+			<if test="codeMaFingerprint != null and codeMaFingerprint != ''">
+				AND a.codeMaFingerprint = #{codeMaFingerprint}
+			</if>
+			<if test="fingerPrint != null and fingerPrint != ''">
+				AND a.fingerPrint = #{fingerPrint}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null and tag != ''">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null and createIp != ''">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null and modifiedUser != ''">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null and modifiedDate != ''">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null and modifiedIp != ''">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaUserConditionMapper.searchWhere"/>
+		</where>
+	</select>
+
+	<!-- 查询实体分页对象集合 -->
+	<select id="selectPage" parameterType="java.lang.Object" resultMap="maUser">
+		SELECT 
+			<include refid="com.framework.dao.MaUserConditionMapper.selectColumn"/>
+			a.id, 
+			a.uid, 
+			a.loginName, 
+			a.password, 
+			a.name, 
+			a.idMaRole, 
+			a.nameMaRole, 
+			a.codeMaRole, 
+			a.idMaCompany, 
+			a.nameMaCompany, 
+			a.uidMaCompany, 
+			a.idMaOrgnization, 
+			a.nameMaOrgnization, 
+			a.cellphone, 
+			a.profilePhoto, 
+			a.badgeNumber, 
+			a.email, 
+			a.gender, 
+			a.indexMaFingerprint, 
+			a.codeMaFingerprint, 
+			a.fingerPrint, 
+			a.remark, 
+			a.status, 
+			a.tag, 
+			a.createUser, 
+			a.createDate, 
+			a.createIp, 
+			a.modifiedUser, 
+			a.modifiedDate, 
+			a.modifiedIp
+		FROM maUser AS a
+		<include refid="com.framework.dao.MaUserConditionMapper.searchFrom"/>
+		<where>
+			a.tag != 'd' AND ${sqlWhere}
+		</where>
+		ORDER BY ${orderBy}
+	</select>
+
+	<!-- 查询树形结构 -->
+	<select id="selectTree" parameterType="java.lang.Object" resultMap="maUser" resultType="java.util.HashMap">
+		SELECT 
+			<include refid="com.framework.dao.MaUserConditionMapper.selectTreeColumn"/>
+			a.id AS value,
+			a.name AS title
+		FROM maUser AS a
+		<include refid="com.framework.dao.MaUserConditionMapper.selectTreeFrom"/>
+		<where>
+				a.tag != 'd'
+			<if test="id != null">
+				AND a.id = #{id}
+			</if>
+			<if test="uid != null">
+				AND a.uid = #{uid}
+			</if>
+			<if test="loginName != null">
+				AND a.loginName = #{loginName}
+			</if>
+			<if test="password != null">
+				AND a.password = #{password}
+			</if>
+			<if test="name != null">
+				AND a.name = #{name}
+			</if>
+			<if test="idMaRole != null">
+				AND a.idMaRole = #{idMaRole}
+			</if>
+			<if test="nameMaRole != null">
+				AND a.nameMaRole = #{nameMaRole}
+			</if>
+			<if test="codeMaRole != null">
+				AND a.codeMaRole = #{codeMaRole}
+			</if>
+			<if test="idMaCompany != null">
+				AND a.idMaCompany = #{idMaCompany}
+			</if>
+			<if test="nameMaCompany != null">
+				AND a.nameMaCompany = #{nameMaCompany}
+			</if>
+			<if test="uidMaCompany != null">
+				AND a.uidMaCompany = #{uidMaCompany}
+			</if>
+			<if test="idMaOrgnization != null">
+				AND a.idMaOrgnization = #{idMaOrgnization}
+			</if>
+			<if test="nameMaOrgnization != null">
+				AND a.nameMaOrgnization = #{nameMaOrgnization}
+			</if>
+			<if test="cellphone != null">
+				AND a.cellphone = #{cellphone}
+			</if>
+			<if test="profilePhoto != null">
+				AND a.profilePhoto = #{profilePhoto}
+			</if>
+			<if test="badgeNumber != null">
+				AND a.badgeNumber = #{badgeNumber}
+			</if>
+			<if test="email != null">
+				AND a.email = #{email}
+			</if>
+			<if test="gender != null">
+				AND a.gender = #{gender}
+			</if>
+			<if test="indexMaFingerprint != null">
+				AND a.indexMaFingerprint = #{indexMaFingerprint}
+			</if>
+			<if test="codeMaFingerprint != null">
+				AND a.codeMaFingerprint = #{codeMaFingerprint}
+			</if>
+			<if test="fingerPrint != null">
+				AND a.fingerPrint = #{fingerPrint}
+			</if>
+			<if test="remark != null">
+				AND a.remark = #{remark}
+			</if>
+			<if test="status != null">
+				AND a.status = #{status}
+			</if>
+			<if test="tag != null">
+				AND a.tag = #{tag}
+			</if>
+			<if test="createUser != null">
+				AND a.createUser = #{createUser}
+			</if>
+			<if test="createDate != null">
+				AND a.createDate = #{createDate}
+			</if>
+			<if test="createIp != null">
+				AND a.createIp = #{createIp}
+			</if>
+			<if test="modifiedUser != null">
+				AND a.modifiedUser = #{modifiedUser}
+			</if>
+			<if test="modifiedDate != null">
+				AND a.modifiedDate = #{modifiedDate}
+			</if>
+			<if test="modifiedIp != null">
+				AND a.modifiedIp = #{modifiedIp}
+			</if>
+			<include refid="com.framework.dao.MaUserConditionMapper.selectTreeWhere"/>
+		</where>
+	</select>
+
+</mapper>

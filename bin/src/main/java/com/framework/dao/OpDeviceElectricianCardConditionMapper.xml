@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.dao.OpDeviceElectricianCardConditionMapper" > 
+	<resultMap type="com.framework.bean.impl.OpDeviceElectricianCardImpl" id="opDeviceElectricianCard"/> 
+
+	<sql id="getColumn">
+		
+	</sql>
+
+	<sql id="getFrom">
+		
+	</sql>
+
+	<sql id="getWhere">
+		
+	</sql>
+
+	<sql id="selectColumn">
+		IFNULL(b.name, '') nameOpDevice,
+		IFNULL(c.location, '') locationOpDeviceCabinet,
+		IFNULL(d.name, '') nameElectrician,
+		IFNULL(e.name, '') nameStatusElectrician,
+		
+	</sql>
+
+	<sql id="selectFrom">
+		
+	</sql>
+
+	<sql id="selectWhere">
+		
+	</sql>
+
+	<sql id="countFrom">
+		
+	</sql>
+
+	<sql id="searchFrom">
+		LEFT JOIN opDevice AS b ON b.id = a.idOpDevice
+		LEFT JOIN opDeviceCabinet AS c ON c.id = b.idOpDeviceCabinet
+		LEFT JOIN MaUser AS d ON d.id = a.idElectrician
+		LEFT JOIN syStatusDetail e ON (e.codeSyStatus = 'ckzt' AND e.value = a.statusElectrician)
+	</sql>
+
+	<sql id="countWhere">
+		
+	</sql>
+
+	<sql id="searchWhere">
+		AND a.tag = "n"
+		<if test="tagMapper == 'unique'">
+			AND id != #{idUnique}
+		</if>
+	</sql>
+
+	<sql id="updateColumn">
+		
+	</sql>
+
+	<sql id="updateWhere">
+		id = #{id}
+	</sql>
+
+	<sql id="selectTreeColumn">
+		
+	</sql>
+
+	<sql id="selectTreeFrom">
+		
+	</sql>
+
+	<sql id="selectTreeWhere">
+		
+	</sql>
+
+	<!-- 电工手机端停电序列wo 送电序列po -->
+	<select id="getStopOrSendPower" parameterType="java.lang.Object" resultMap="opDeviceElectricianCard">
+		SELECT
+			a.midOpWorkOrder,
+			d.name,
+			d.description,
+			a.idChecker,
+			a.nameChecker,
+			a.listNameElectrician,
+			c.location,a.idElectrician,
+			a.dateSendOpCardPower,a.dateSendOpCardWork,b.name AS deviceName
+		FROM
+			opDeviceElectricianCard AS a
+		LEFT JOIN opDevice AS b ON b.id = a.idOpDevice
+		LEFT JOIN opDeviceCabinet AS c ON c.code = b.idOpDeviceCabinet
+		LEFT JOIN opWorkOrder AS d ON d.id =  a.midOpWorkOrder
+		WHERE
+			a.statusElectrician = #{statusElectrician} <!-- 'wo'停电序列   ‘po’送电序列-->
+		AND a.idMaCompany = #{idMaCompany}
+		AND a.tag != 'd'
+		AND a.tag = "n"
+		AND a.idElectrician = #{idElectrician}
+		ORDER BY a.createDate DESC
+		<!-- 
+		<if test="midOpWorkOrder != null and midOpWorkOrder != ''">
+			AND d.id LIKE '%'#{midOpWorkOrder}'%'
+		</if>
+		 -->
+	</select>
+</mapper>
