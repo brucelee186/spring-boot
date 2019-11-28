@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.framework.bean.common.Cons;
 import com.framework.bean.impl.OpCardOperationImpl;
@@ -72,8 +73,10 @@ public class OpDeviceServiceImpl extends CommonServiceImpl implements OpDeviceSe
 	 * 新增实体对象
 	 * @param opDevice
 	 */
+	@Transactional
 	public OpDeviceImpl insert(OpDeviceImpl opDevice) throws CoException {
 		this.opDeviceMapper.insert(opDevice);
+		//int a=1/0;
 		this.insertOpCard(opDevice);
 		return opDevice;
 	}
