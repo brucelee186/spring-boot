@@ -1,27 +1,30 @@
 ﻿package com.framework.action.operation;
 
 import java.util.List;
-import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageInfo;
-import com.framework.exception.CoException;
-import com.framework.util.CoUtil;
-import com.framework.util.UtValid;
-import com.framework.util.PageUtil;
 import com.framework.action.BaseController;
+import com.framework.bean.common.SessionInfo;
 import com.framework.bean.impl.OpDeviceImpl;
-import com.framework.bean.impl.OpWorkOrderImpl;
+import com.framework.exception.CoException;
 import com.framework.service.OpDeviceService;
+import com.framework.util.CoUtil;
+import com.framework.util.PageUtil;
+import com.framework.util.UtValid;
+import com.github.pagehelper.PageInfo;
 
 /*
 **********************************************
@@ -153,9 +156,11 @@ public class OpDeviceController extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-	public String edit(@RequestBody String requestParams) {
+	public String edit(@RequestBody String requestParams, HttpServletRequest request) {
 		JSONObject resultJson = new JSONObject();
 		try {
+			HttpSession sessoion = request.getSession();
+			SessionInfo sessionInfo = (SessionInfo) session.getAttribute("sessionInfo");
 			JSONObject requestJson = JSON.parseObject(requestParams);
 			Long idMaCompany = requestJson.getJSONObject("userdata").getJSONObject("idMaCompany").getLong("value");
 			//带班人:le, 点检员:ch, 操作工:op, 电工:el,管理员:ad, 员工:em, 工长:ma
