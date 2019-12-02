@@ -9,7 +9,7 @@ import com.framework.util.UtMqRabbitConfig;
 //@Component
 public class Sender {
 	
-	@Autowired
+	//@Autowired
 	private AmqpTemplate amqpTemplate;
 	
 	public void sendFanout() {
