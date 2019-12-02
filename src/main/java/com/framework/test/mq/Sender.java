@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import com.framework.util.UtMqRabbitConfig;
 
-@Component
+//@Component
 public class Sender {
 	
 	@Autowired

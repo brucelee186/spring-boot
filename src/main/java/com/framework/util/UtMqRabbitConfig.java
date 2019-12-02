@@ -12,7 +12,7 @@ public class UtMqRabbitConfig {
 
 	public static final String QUEUE_DIRECT = "directQueue";
 	
-	@Bean
+	//@Bean
 	public Queue directQueue() {
 		return new Queue(QUEUE_DIRECT, true);
 	}
